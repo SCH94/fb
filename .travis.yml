@@ -1,0 +1,13 @@
+language: ruby
+dist: xenial
+rvm: 2.3.3
+before_install: gem uninstall -i /home/travis/.rvm/gems/ruby-2.3.3@global did_you_mean
+before_script: bin/rails db:migrate RAILS_ENV=test
+script:
+  - bundle exec rake
+  - bundle exec rake coveralls:push 
+addons:
+  code_climate:
+    repo_token: $CODECLIMATE_REPO_TOKEN
+after_success:
+  - bundle exec codeclimate-test-reporter
