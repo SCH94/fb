@@ -59,3 +59,11 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 World(FactoryGirl::Syntax::Methods)
+
+# Warden helpers to speed up login
+# # See https://github.com/plataformatec/devise/wiki/How-To:-Test-with-Capybara
+include Warden::Test::Helpers
+
+After do
+  Warden.test_reset!
+end

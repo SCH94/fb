@@ -57,7 +57,7 @@ group :development, :test do
   gem 'coveralls', require: false
   gem 'letter_opener'
   # Reset table primary keys when deleting all records
-  # gem 'activerecord-reset-pk-sequence'
+  gem 'activerecord-reset-pk-sequence'
 end
 
 group :development do

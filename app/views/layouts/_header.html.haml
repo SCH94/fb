@@ -1,0 +1,7 @@
+%header
+  = link_to 'Facebook', root_path, id: 'logo'
+  %nav
+    - if user_signed_in?
+      .nav-signed-in
+        = link_to 'Profile', @user
+        = link_to 'Sign out', destroy_user_session_path, method: :delete
