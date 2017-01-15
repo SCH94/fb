@@ -2,7 +2,6 @@ Given(/^I click on "([^"]*)"$/) do |arg1|
   click_link arg1
 end
 
-
 When(/^I click on "([^"]*)" button$/) do |arg1|
   click_button arg1
 end

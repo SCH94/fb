@@ -12,7 +12,7 @@ Feature: Sign up page
       | Element                     | Label                 |
       | user[first_name]            | First name            |
       | user[last_name]             | Last name             |
-      | user[email]                 | Email                 |
+      | user[email] | Email |  
       | user[username]              | Username              |
       | user[gender]                | Male                  |
       | user[gender]                | Female                |

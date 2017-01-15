@@ -4,7 +4,7 @@ Feature: Sign in
   I want to sign in
 
   Background:
-    Given a user "pepe" exists and I am on the sign in page
+    Given a user "Laura 'Megaton' Reid" exists and I am on the sign in page
 
   Scenario: Successful sign in
     When I fill in sign-in details

@@ -16,12 +16,20 @@ Given(/^I am on the profile page$/) do
 end
 
 Given(/^a user "([^"]*)" exists$/) do |arg1|
-  arg1 = create :user
+  first_second_name = arg1.split[0..-2].join(' ')
+  last_name = arg1.split.last
+  first_name = first_second_name.split
+  user = create :user, first_name: first_name.unshift(first_name.shift.capitalize).join(' '), last_name: last_name.capitalize
+  # email and username are dynamically created in the factory.
 end
 
 Given(/^a user "([^"]*)" is logged in$/) do |arg1|
-	arg1 = create :user
-	login_as arg1, scope: :user
+  first_second_name = arg1.split[0..-2].join(' ')
+  last_name = arg1.split.last
+  first_name = first_second_name.split
+  user = create :user, first_name: first_name.unshift(first_name.shift.capitalize).join(' '), last_name: last_name.capitalize
+	login_as user, scope: :user
+  # email and username are dynamically created in the factory.
 end
 
 Given(/^a user "([^"]*)" exists and I am on the sign in page$/) do |arg1|
@@ -55,8 +63,9 @@ When(/^I fill in incorrect or incomplete details$/) do
 end
 
 When(/^I fill in sign\-in details$/) do
+  user = User.first
   within 'form.new_user' do
-    fill_in 'user_email', with: 'pepe.bas@example.com'
+    fill_in 'user_email', with: user.email
     fill_in 'Password', with: 'foobar'
   end
 end

@@ -2,3 +2,4 @@
 %p Find me in app/views/users/show.html.haml
 
 %h2 Hi #{@user.first_name} #{@user.last_name}!
+= button_to 'Add friend', user_friend_requests_path(current_user)
