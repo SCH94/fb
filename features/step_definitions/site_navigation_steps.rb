@@ -22,3 +22,7 @@ end
 Then(/^with label "([^"]*)"$/) do |arg1|
   page.find 'label', text: arg1, match: :prefer_exact 
 end
+
+When(/^I go to the home page$/) do
+  visit '/'
+end

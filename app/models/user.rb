@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :friends, foreign_key: 'friendee_id'
   has_many :frienders, through: :friends
 
+  has_many :posts
+
   def fb_friends
     fee = Friend.where friender_id: self.to_param
     frienders = self.frienders

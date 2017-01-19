@@ -1,6 +1,10 @@
 %h1 Users#show
-%p Find me in app/views/users/show.html.haml
-
+.profile-postsbox
+  .postsbox
+    Your thoughts
+    = form_for @post, url: user_posts_path(current_user) do |f|
+      = f.text_area :content, size: '50x5'
+      = f.submit
 %h2
   = @user.first_name
   = @user.last_name

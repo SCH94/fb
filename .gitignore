@@ -21,6 +21,7 @@ coverage
 
 # Ignore rspec settings.
 .rspec
+.rspec-local
 
 # Ignore Coveralls configuration file.
 .coveralls.yml
