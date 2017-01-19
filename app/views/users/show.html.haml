@@ -1,5 +1,14 @@
 %h1 Users#show
 %p Find me in app/views/users/show.html.haml
 
-%h2 Hi #{@user.first_name} #{@user.last_name}!
-= button_to 'Add friend', user_friend_requests_path(current_user)
+%h2
+  = @user.first_name
+  = @user.last_name
+
+- if fb_friend?
+  .fb-friend You are friends with this person
+- else
+  - if can_add_user
+    = button_to 'Add friend', user_friend_requests_path(current_user, requested_friend_id: @user )
+%br/
+= link_to 'Friends', user_friends_path(current_user)

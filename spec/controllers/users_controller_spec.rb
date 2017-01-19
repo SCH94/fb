@@ -1,8 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  before do
+    sign_in(@user = create(:user))
+  end
 
-  xdescribe 'GET #index' do
+  describe 'GET #index' do
     it 'returns http success' do
       get :index
       expect(response).to have_http_status(:success)
@@ -14,12 +17,12 @@ RSpec.describe UsersController, type: :controller do
       context 'it makes @user available to template' do
         it 'calls find on User' do
           expect(User).to receive(:find)
-          get :show, params: { id: 1 } 
+          get :show, params: { id: @user.to_param } 
         end
 
         it 'assigns resource to @user' do
           allow(User).to receive(:find).and_return(2)
-          get :show, params: { id: 1 }
+          get :show, params: { id: @user.to_param }
           expect(assigns :user).to eq(2)
         end
       end
@@ -27,13 +30,13 @@ RSpec.describe UsersController, type: :controller do
 
     it 'returns http success' do
       allow(User).to receive(:find)
-      get :show, params: { id: 1 }
+      get :show, params: { id: @user.to_param }
       expect(response).to have_http_status :success
     end
 
     it 'renders :show template' do
       allow(User).to receive(:find)
-      get :show, params: { id: 1 }
+      get :show, params: { id: @user.to_param }
       expect(response).to render_template :show
     end
   end

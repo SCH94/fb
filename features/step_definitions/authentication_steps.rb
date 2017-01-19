@@ -1,4 +1,4 @@
-Given(/^I am on the homepage$/) do
+Given(/^I am on the home page$/) do
   visit '/'
 end
 
@@ -11,25 +11,25 @@ Given(/^I am on the sign in page$/) do
 end
 
 Given(/^I am on the profile page$/) do
-	user_id = User.last.id
-	visit "/users/#{user_id}"
+	visit "/users/#{@current_user.id}"
 end
 
 Given(/^a user "([^"]*)" exists$/) do |arg1|
   first_second_name = arg1.split[0..-2].join(' ')
   last_name = arg1.split.last
-  first_name = first_second_name.split
-  user = create :user, first_name: first_name.unshift(first_name.shift.capitalize).join(' '), last_name: last_name.capitalize
+  first_name_arr = first_second_name.split
+  user = create :user, first_name: first_name_arr.unshift(first_name_arr.shift.capitalize).join(' '), last_name: last_name.capitalize
   # email and username are dynamically created in the factory.
 end
 
 Given(/^a user "([^"]*)" is logged in$/) do |arg1|
   first_second_name = arg1.split[0..-2].join(' ')
   last_name = arg1.split.last
-  first_name = first_second_name.split
-  user = create :user, first_name: first_name.unshift(first_name.shift.capitalize).join(' '), last_name: last_name.capitalize
+  first_name_arr = first_second_name.split
+  user = create :user, first_name: first_name_arr.unshift(first_name_arr.shift.capitalize).join(' '), last_name: last_name.capitalize
 	login_as user, scope: :user
   # email and username are dynamically created in the factory.
+  @current_user = user
 end
 
 Given(/^a user "([^"]*)" exists and I am on the sign in page$/) do |arg1|
@@ -39,7 +39,7 @@ Given(/^a user "([^"]*)" exists and I am on the sign in page$/) do |arg1|
   }
 end
 
-When(/^I fill in registration details$/) do
+When(/^I fill in valid registration details and click on "([^"]*)" button$/) do |arg1|
   within 'form.new_user' do
     fill_in 'user_first_name', with: 'Pepe'
     fill_in 'user_last_name', with: 'Bas'
@@ -48,6 +48,9 @@ When(/^I fill in registration details$/) do
     choose 'Male'
     fill_in 'Password', with: 'foobar'
     fill_in 'Password confirmation', with: 'foobar'
+    step %{I click on "#{}" button}
+
+    @current_user = User.find_for_authentication(email: "pepe.bas@example.com")
   end
 end
 
@@ -86,8 +89,7 @@ Then(/^I should not be on the home page$/) do
 end
 
 Then(/^I should be on the profile page$/) do
-  user_id = User.last.id
-  expect(page).to have_current_path("/users/#{user_id}")
+  expect(page).to have_current_path("/users/#{@current_user.id}")
 end
 
 Then(/^I should not be on the profile page$/) do

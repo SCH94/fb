@@ -1,15 +1,35 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the UsersHelper. For example:
-#
-# describe UsersHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe UsersHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe 'display add friend button based on user' do
+    it "checks if profile page is not current user's" do
+      sign_in(curr_user = create(:user))
+      @user = create :user, first_name: 'Loren', last_name: 'Burgos'
+      expect(helper.can_add_user).to be true
+    end
+
+    it "checks if profile page is current user's" do
+      sign_in(curr_user = create(:user))
+      @user = curr_user
+      expect(helper.can_add_user).to be false
+    end
+  end
+
+  describe 'display add friend button if not yet an fb friend' do
+    before do
+      sign_in(@curr_user = create(:user))
+      @user = create :user, first_name: 'Loren', last_name: 'Burgos'
+    end
+
+    it 'user is not yet a facebook friend' do
+      expect(helper.fb_friend?).to be false
+    end
+
+    it 'user is already a facebook friend' do
+      @curr_user.frienders << @user
+      expect(helper.fb_friend?).to be true 
+    end
+
+  end
 end

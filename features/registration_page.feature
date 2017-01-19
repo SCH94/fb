@@ -9,12 +9,12 @@ Feature: Sign up page
     And with label "<Label>"
 
     Examples:
-      | Element                     | Label                 |
-      | user[first_name]            | First name            |
-      | user[last_name]             | Last name             |
-      | user[email] | Email |  
-      | user[username]              | Username              |
-      | user[gender]                | Male                  |
-      | user[gender]                | Female                |
-      | user[password]              | Password              |
-      | user[password_confirmation] | Password confirmation |
+      | Element                     | Label                 |  
+      | user[first_name]            | First name            |  
+      | user[last_name]             | Last name             |  
+      | user[email]                 | Email                 |  
+      | user[username]              | Username              |  
+      | user[gender]                | Male                  |  
+      | user[gender]                | Female                |  
+      | user[password]              | Password              |  
+      | user[password_confirmation] | Password confirmation |  

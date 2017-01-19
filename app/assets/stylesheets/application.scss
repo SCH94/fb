@@ -21,3 +21,14 @@ nav {
   display: flex;
   justify-content: flex-end;
 }
+
+.alert {
+  color: red;
+  text-shadow: 1px 1px 3px cyan;
+}
+
+.notice {
+  color: green;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px cyan;
+}

@@ -7,10 +7,9 @@ Feature: Sign up
     Given I am on the sign up page
 
   Scenario: Successful signup
-    When I fill in registration details
-    And I click on "Create Account" button
+    When I fill in valid registration details and click on "Create Account" button
     Then I should be on the profile page
-    And I should see "Welcome to Facebook!" and "Hi Pepe Bas!"
+    And I should see "Welcome to Facebook! You have signed up successfully."
 
   Scenario: Unsuccessful signup
     When I fill in incorrect or incomplete details

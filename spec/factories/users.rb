@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :user, aliases: [:friend_requestor, :requested_friend] do
+  factory :user, aliases: [:friend_requestor, :friendee] do
     first_name 'Pepe'
     last_name 'Bas'
     username { "#{first_name.split.first}".downcase } 

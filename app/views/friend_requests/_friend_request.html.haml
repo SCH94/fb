@@ -1,0 +1,8 @@
+.friendrequest
+  .user
+    = friend_requestor_name(friend_request)
+  .friendrequestbuttons
+    .confirmbutton
+      = button_to 'Confirm', user_friends_path(current_user, friender_id: friend_request.friend_requestor)
+    .deleterequestbutton
+      = button_to 'Delete request', friend_request_path(friend_request), method: :delete

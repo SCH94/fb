@@ -1,0 +1,5 @@
+.friendslist
+	%h2 Friends
+	= render @friends
+%br/
+= link_to 'Friend requests', user_friend_requests_path(current_user)

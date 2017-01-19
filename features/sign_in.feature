@@ -19,3 +19,9 @@ Feature: Sign in
     Then I should see "Invalid Email or password."
 		And I should not see "Profile" and "Sign out"
     And I should not be on the home page
+
+  Scenario: Sign-in navigation links
+    Given I am logged in as "Laura 'Megaton' Reid"
+    And I am on the home page
+    When I click on "Profile"
+    Then I should be on the profile page

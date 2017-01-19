@@ -6,9 +6,22 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
 
-  has_many :friend_requests, foreign_key: 'friend_requestor_id'
-  has_many :friendees, through: :friend_requests, source: :requested_friend
+  has_many :sent_friend_requests, class_name: 'FriendRequest', foreign_key: 'friend_requestor_id'
+  has_many :friendees, through: :sent_friend_requests, source: :requested_friend
 
-  has_many :friend_requests, foreign_key: 'requested_friend_id'
-  has_many :frienders, through: :friend_requests, source: :friend_requestor
+  has_many :friend_invitations, class_name: 'FriendRequest', foreign_key: 'requested_friend_id'
+  has_many :frienders, through: :friend_invitations, source: :friend_requestor
+
+  has_many :friends, foreign_key: 'friender_id'
+  has_many :friendees, through: :friends
+
+  has_many :friends, foreign_key: 'friendee_id'
+  has_many :frienders, through: :friends
+
+  def fb_friends
+    fee = Friend.where friender_id: self.to_param
+    frienders = self.frienders
+    friendees = fee.map(&:friendee)
+    frienders + friendees
+  end
 end

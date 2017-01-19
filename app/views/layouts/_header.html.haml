@@ -3,5 +3,5 @@
   %nav
     - if user_signed_in?
       .nav-signed-in
-        = link_to 'Profile', @user
+        = link_to 'Profile', current_user
         = link_to 'Sign out', destroy_user_session_path, method: :delete
