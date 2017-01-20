@@ -10,18 +10,23 @@ RSpec.describe UsersController, type: :controller do
       get :index
       expect(response).to have_http_status(:success)
     end
+
   end
 
   describe 'GET #show' do
+
     describe 'instance variable assignment' do
 
       before :each do
-        allow(User).to receive(:find).and_return(2)
-        allow(controller.current_user).to receive(:posts)
-        allow(controller.current_user.posts).to receive(:build).and_return true
+        allow(User).to receive(:find).and_return user
+        allow(Post).to receive(:new).and_return true
       end
 
-      context 'it makes @user available to template' do
+      let(:user) { double 'User Double', posts: user_posts_collection }
+      let(:user_posts_collection) { double 'User Posts Collection double', latest: user_latest_posts_collection }
+      let(:user_latest_posts_collection) { double "User's Latest Posts Collection double" }
+
+      describe 'it makes @user available to template' do
         it 'calls find on User' do
           expect(User).to receive(:find)
           get :show, params: { id: @user.to_param } 
@@ -29,18 +34,23 @@ RSpec.describe UsersController, type: :controller do
 
         it 'assigns resource to @user' do
           get :show, params: { id: @user.to_param }
-          expect(assigns :user).to eq(2)
+          expect(assigns :user).to eq user
+        end
+
+        it 'returns http success' do
+          get :show, params: { id: @user.to_param }
+          expect(response).to have_http_status :success
+        end
+
+        it 'renders :show template' do
+          get :show, params: { id: @user.to_param }
+          expect(response).to render_template :show
         end
       end
 
-      context 'it makes @post available to template' do
-        it 'calls #posts on current_user' do
-          expect(controller.current_user).to receive(:posts)
-          get :show, params: { id: 'any' }
-        end
-
-        it 'calls #build on posts' do
-          expect(controller.current_user.posts).to receive(:build)
+      describe 'it makes @post available to template' do
+        it 'calls #new on Post' do
+          expect(Post).to receive(:new)
           get :show, params: { id: 'any' }
         end
 
@@ -49,19 +59,26 @@ RSpec.describe UsersController, type: :controller do
           expect(assigns :post).to eq true 
         end
       end
+
+      describe "it makes user's post collection available to the views" do
+        it 'calls #posts on @user' do
+          get :show, params: { id: 'any' }
+          expect(assigns :user).to have_received(:posts)
+        end
+
+        it 'calls #latest on #posts' do
+          get :show, params: { id: 'any' }
+          expect(assigns[:user].posts).to have_received(:latest)
+        end
+
+        it 'makes post collection available to the template' do
+          get :show, params: { id: 'any' }
+          expect(assigns :posts).to eq user_latest_posts_collection
+        end
+      end
+
     end
 
-    it 'returns http success' do
-      allow(User).to receive(:find)
-      get :show, params: { id: @user.to_param }
-      expect(response).to have_http_status :success
-    end
-
-    it 'renders :show template' do
-      allow(User).to receive(:find)
-      get :show, params: { id: @user.to_param }
-      expect(response).to render_template :show
-    end
   end
 
 end

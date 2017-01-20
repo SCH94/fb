@@ -22,8 +22,6 @@ class FriendRequestsController < ApplicationController
     redirect_to user_friend_requests_path(current_user), notice: 'Deleted friend request by Loren Burgos'
   end
 
-  private
-
     def friend_requests_params
       params.permit(:requested_friend_id)
     end

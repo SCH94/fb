@@ -2,6 +2,12 @@
 .home-postsbox
   .postsbox
     Your thoughts
+    %br/
     = form_for @post, url: user_posts_path(current_user) do |f|
-      = f.text_area :content, size: '50x5', default: 'Write your status'
-      = f.submit
+      = f.text_area :content, size: '50x5'
+      %br/
+      .submitpost
+        = f.submit
+
+.home-posts
+  = render @posts

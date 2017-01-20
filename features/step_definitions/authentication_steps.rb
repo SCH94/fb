@@ -14,6 +14,11 @@ Given(/^I am on the profile page$/) do
 	visit "/users/#{@current_user.id}"
 end
 
+
+When(/^I go to the profile page$/) do
+  visit "/users/#{@current_user.id}"
+end
+
 Given(/^a user "([^"]*)" exists$/) do |arg1|
   first_second_name = arg1.split[0..-2].join(' ')
   last_name = arg1.split.last
@@ -98,6 +103,11 @@ end
 
 Then(/^I should be on the sign in page$/) do
   expect(page).to have_current_path '/users/sign_in'
+end
+
+Then(/^I should still be on "([^"]*)"'s profile page$/) do |arg1|
+  arg1 = User.find_for_authentication(email: "#{arg1.split.first}.#{arg1.split.last}@example.com")
+  expect(page).to have_current_path "/users/#{arg1.id}"
 end
 
 Then(/^I should not see "([^"]*)" and "([^"]*)"$/) do |arg1, arg2|

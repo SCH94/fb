@@ -5,6 +5,12 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def create
+    post = current_user.posts.build(post_params)
+    redirect_back fallback_location: root_path, notice: 'Post created' and return if post.save
+    redirect_back fallback_location: root_path, notice: post.errors.full_messages.first[:message]
+  end
+
   def destroy
     post = Post.find(params[:id])
     post.destroy
@@ -13,6 +19,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+    def post_params
+      params.require(:post).permit(:content)
+    end
 
     def own_post?
       post = Post.find(params[:id])

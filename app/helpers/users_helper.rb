@@ -6,4 +6,12 @@ module UsersHelper
   def fb_friend?
     current_user.fb_friends.include? @user
   end
+
+  def gender_english(user)
+    case user.gender
+    when 'M' then 'Male'
+    when 'F' then 'Female'
+    else 'Not specified'
+    end
+  end
 end

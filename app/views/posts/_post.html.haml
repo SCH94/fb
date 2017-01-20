@@ -1,0 +1,28 @@
+.post
+  .postowner
+    .name
+      by
+      = post_owner(post)
+    .elapsed
+      = time_ago_in_words post.created_at
+  .content
+    = simple_format post.content
+    -# = post.content
+    .buttons
+      = button_to 'Delete', post, method: :delete if post.user == current_user
+      - unless post.likers.include? current_user
+        .likepanel
+          .likebutton
+            = button_to 'Like', post_likes_path(post)
+          .likecount
+            = pluralize(post.likes.count, 'like')
+      - else
+        .likepanel
+          .likebutton
+            = button_to 'Unlike', post_likes_path(post)
+          .likecount
+            = pluralize(post.likes.count, 'like')
+        .youlike
+          You like this
+
+

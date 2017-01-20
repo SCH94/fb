@@ -29,8 +29,8 @@ RSpec.describe FriendsController, type: :controller do
       create :friend, friender: friender, friendee: @user
       allow(controller.current_user).to receive(:friends)
       allow(controller.current_user.friends).to receive(:build).and_return(friend_relationship)
-			allow(FriendRequest).to receive(:where).and_return(friend_request)
-			allow(FriendRequest.where.first).to receive(:destroy)
+	  allow(FriendRequest).to receive(:where).and_return(friend_request)
+	  allow(FriendRequest.where.first).to receive(:destroy)
     end
 
     let(:friender) { User.find_by_email('pepe.bas@example.com') }

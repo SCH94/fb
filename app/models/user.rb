@@ -20,6 +20,9 @@ class User < ApplicationRecord
 
   has_many :posts
 
+  has_many :likes
+  has_many :posts_liked, through: :likes, source: :post
+
   def fb_friends
     fee = Friend.where friender_id: self.to_param
     frienders = self.frienders

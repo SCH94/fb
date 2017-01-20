@@ -1,13 +1,19 @@
-%h1 Users#show
+%h1
+  = @user.first_name
+  = @user.last_name
+  %br/
+  %span{:style => 'color: lightcoral; font-style: oblique; font-size: .9rem;'}= @user.email
+  %br/
+%h4= gender_english @user
 .profile-postsbox
   .postsbox
     Your thoughts
+    %br/
     = form_for @post, url: user_posts_path(current_user) do |f|
       = f.text_area :content, size: '50x5'
-      = f.submit
-%h2
-  = @user.first_name
-  = @user.last_name
+      %br/
+      .submitpost
+        = f.submit
 
 - if fb_friend?
   .fb-friend You are friends with this person
@@ -16,3 +22,6 @@
     = button_to 'Add friend', user_friend_requests_path(current_user, requested_friend_id: @user )
 %br/
 = link_to 'Friends', user_friends_path(current_user)
+
+.profile-posts
+  = render @posts

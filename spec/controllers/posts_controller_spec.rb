@@ -36,4 +36,36 @@ RSpec.describe PostsController, type: :controller do
     end
 
   end
+
+  describe 'POST #create' do
+
+    describe 'create a post' do
+      before :example do
+        sign_in @user = create(:user)
+        allow(controller.current_user).to receive(:posts)
+        allow(controller.current_user.posts).to receive(:build).and_return built_post
+      end
+
+      let(:built_post) { double 'Post Double', save: nil, errors: errors }
+      let(:errors) { double 'Error Messages double', full_messages: full_messages }
+      let(:full_messages) { double 'Full Messages double', first: { message: 'Buhay ka pa!' } }
+
+      it 'calls #posts on current_user' do
+        expect(controller.current_user).to receive(:posts)
+        post :create, params: { user_id: @user.to_param, post: { content: 'Hey'} }
+      end
+
+      it 'calls #build on #posts' do
+        expect(controller.current_user.posts).to receive(:build)
+        post :create, params: { user_id: @user.to_param, post: { content: 'Hey'} }
+      end
+
+      it 'calls #save on post' do
+        expect(built_post).to receive(:save)
+        post :create, params: { user_id: @user.to_param, post: { content: 'Hey'} }
+      end
+    end
+
+  end
+
 end
