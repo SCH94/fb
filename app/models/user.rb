@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
   has_many :friends, foreign_key: 'friender_id'
   has_many :friendees, through: :friends
-  
+
   has_many :friends, foreign_key: 'friendee_id'
   has_many :frienders, through: :friends
 
@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :comments, foreign_key: 'commenter_id'
   has_many :posts_commented, through: :comments, source: :post
 
+  mount_uploader :avatar, AvatarUploader
+  
   def fb_friends
     fee = Friend.where friender_id: self.to_param
     frienders = self.frienders

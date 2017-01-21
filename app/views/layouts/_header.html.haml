@@ -3,5 +3,7 @@
   %nav
     - if user_signed_in?
       .nav-signed-in
+        = link_to 'Feed', feed_user_posts_path(current_user)
         = link_to 'Profile', current_user
+        = link_to 'Edit Profile', edit_user_registration_path
         = link_to 'Sign out', destroy_user_session_path, method: :delete

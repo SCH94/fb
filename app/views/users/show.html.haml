@@ -2,6 +2,9 @@
   = @user.first_name
   = @user.last_name
   %br/
+  .profilepic
+    .piccontainer
+      = image_tag @user.avatar_url(:thumb), class: 'pic' if @user.avatar?
   %span{:style => 'color: lightcoral; font-style: oblique; font-size: .9rem;'}= @user.email
   %br/
 %h4= gender_english @user

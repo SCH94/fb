@@ -38,11 +38,16 @@ body {
 }
 
 a:link {
-  color: yellow;
+  color: rgb(162, 44, 244);
   text-decoration: none;
 }
 
 a:visited {
   color: lightcoral;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(244, 44, 212);
   text-decoration: none;
 }

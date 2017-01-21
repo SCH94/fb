@@ -10,3 +10,16 @@
 	border: 1px green solid;
 	display: inline-block;
 }
+
+#edit_user {
+  > .fieldimage { margin: 10px 0;}
+  > .fieldfile { display: block; margin: 0px auto; }
+}
+
+.profilepic {
+  > .piccontainer { border-bottom: 0; margin: 0; padding: 0;}
+  > .piccontainer > .pic {  padding: 12px 10px 32px 13px; margin: 10px 0 0 0; background: rgba(#cfe9f2, 0.72) url(polaroid.jpg) no-repeat; border-radius: 10px; }
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

@@ -28,6 +28,12 @@
     %i (we need your current password to confirm your changes)
     %br/
     = f.password_field :current_password, autocomplete: "off"
+  .fieldimage
+    = image_tag @user.avatar_url if @user.avatar?
+  .fieldfile
+    = f.file_field :avatar
+    = f.hidden_field :avatar_cache
+  %br
   .actions
     = f.submit "Update"
 %h3 Cancel my account
