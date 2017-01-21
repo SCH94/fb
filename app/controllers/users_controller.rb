@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+
   def index
   end
 
@@ -7,5 +7,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @post = Post.new
     @posts = @user.posts.latest
+    @comment = Comment.new
   end
 end

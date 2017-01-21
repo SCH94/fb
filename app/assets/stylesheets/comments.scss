@@ -1,0 +1,45 @@
+// Place all the styles related to the comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.comment-form {
+  text-align: center;
+  align-items: center;
+  margin: 20px 0 0 0;
+}
+
+.commentbox{
+
+}
+
+.commentbutton {
+  display: inline-block;
+  float: right;
+}
+
+.posted-comments {
+  > .posted-comment { margin-bottom: 10px; }
+  margin: 15px 0 0 0;
+  padding: 10px 10px 0 10px;
+  text-align: center;
+
+}
+
+.posted-comment {
+  > .commenter {  font-size: .8em; font-style: oblique; float: left; margin: 0 0 3px 25px; }
+  > .timeago { font-size: .7em; font-style: oblique; float: right; margin: 0 25px 0 0; color: lightblue; }
+  border-radius: 30px;
+  background-color: gray;
+  }
+
+  .comment {
+    width: 320px;
+    margin: 0px auto;
+    display: inline-block;
+  }
+
+  .commenter {
+  }
+
+  .timeago {
+    display: inline-block;
+  }

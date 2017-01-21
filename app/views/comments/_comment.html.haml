@@ -1,0 +1,7 @@
+.posted-comment
+  .commenter
+    = link_to "#{commenter(comment)}", comment.commenter
+  .timeago
+    = time_ago_in_words comment.created_at
+  .comment
+    = simple_format comment.body

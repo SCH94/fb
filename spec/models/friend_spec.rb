@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Friend, type: :model do
   let(:user1) { User.find_for_authentication(email: 'pEpE.bas@example.com') }
-  let(:user2) { User.find_for_authentication(email: 'LorEn.Burgos@exapmle.com') }
+  let(:user2) { User.find_for_authentication(email: 'LorEn.Burgos@example.com') }
   let(:friend_relationship) { create :friend }
 
   it 'is a valid friend relationship' do
@@ -25,7 +25,8 @@ RSpec.describe Friend, type: :model do
   end
 
   it 'invalidates duplicates' do
-    duplicate_friend_relationship = Friend.new friender: user2, friendee: user1 
+    create :friend
+    duplicate_friend_relationship = Friend.new friender: user2, friendee: user1
     expect(duplicate_friend_relationship).not_to be_valid
   end
 end

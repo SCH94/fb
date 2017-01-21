@@ -1,5 +1,4 @@
 Given(/^I go to "([^"]*)"'s profile page$/) do |arg1|
-  first_second_name = arg1.split[0..-2].join(' ')
   arg1 = User.find_for_authentication(email: "#{arg1.split.first}.#{arg1.split.last}@example.com")
   visit "/users/#{arg1.id}"
   expect(page).to have_current_path "/users/#{arg1.id}"

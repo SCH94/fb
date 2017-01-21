@@ -12,7 +12,7 @@ RSpec.describe LikesController, type: :controller do
 
     let(:post_likee) { double 'Post To Like double' }
     let(:likes_collection) { double 'Likes Collection double', where: likes_with_post_likee }
-    let(:likes_with_post_likee) { double 'Likes With Post Likee doube', first: existing_like }
+    let(:likes_with_post_likee) { double 'Likes With Post Likee double', first: existing_like }
     let(:existing_like) { double 'Existing Like double', destroy: nil }
 
     describe 'to unlike' do

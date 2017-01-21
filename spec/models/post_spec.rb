@@ -9,7 +9,7 @@ RSpec.describe Post, type: :model do
       let(:post) { create :post }
 
       it 'is a valid post' do
-        expect(post).to be_valid 
+        expect(post).to be_valid
       end
 
       it 'is not a valid post' do
@@ -31,7 +31,7 @@ RSpec.describe Post, type: :model do
       let!(:post) { create :post }
 
       it 'makes sure post is gone' do
-        expect{post.destroy}.to change(Post, :count).by -1  
+        expect{post.destroy}.to change(Post, :count).by(-1)  
       end
     end
   end
@@ -46,7 +46,7 @@ RSpec.describe Post, type: :model do
     end
 
     it "returns posts's owner's first name" do
-      expect(@post.user_first_name).to eq 'Pepe'  
+      expect(@post.user_first_name).to eq 'Pepe'
     end
 
     it "returns' post's owner's last name" do
@@ -58,8 +58,8 @@ RSpec.describe Post, type: :model do
     it 'sorts posts by latest date' do
       first_post = create :post, content: 'First post!'
       second_post = create :post, content: 'Second post!', user: first_post.user
-      expect(Post.latest).to start_with second_post 
-      expect(Post.latest).to end_with first_post 
+      expect(Post.latest).to start_with second_post
+      expect(Post.latest).to end_with first_post
     end
   end
 end

@@ -7,11 +7,12 @@ Given(/^"([^"]*)" is friends with "([^"]*)", "([^"]*)" and "([^"]*)"$/) do |arg1
 end
 
 When(/^I visit "([^"]*)"'s friends page$/) do |arg1|
-  visit "/users/#{@current_user.id}/friends"
+	user = User.find_for_authentication(email: "#{arg1.split.first}.#{arg1.split.last}@example.com") || (step %{a user "#{arg1}" exists})
+  visit "/users/#{user.id}/friends"
 end
 
 Then(/^I should see his list of friends$/) do
-  within '.friendslist', text: 'Friends' do
+	within '.friendslist', text: 'Friends' do
 		@current_user.fb_friends.each do |f|
 			expect(page).to have_text "#{f.first_name} | #{f.email} |"
 		end

@@ -1,5 +1,4 @@
 class FriendsController < ApplicationController
-  rescue_from StandardError, with: :show_error
 
   def index
 		@friends = current_user.fb_friends
@@ -20,9 +19,5 @@ class FriendsController < ApplicationController
 
     def friend_relationship_params
       params.permit(:friender_id)
-    end
-
-    def show_error
-      render file: 'public/500', layout: false
     end
 end

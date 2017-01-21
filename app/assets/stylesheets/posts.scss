@@ -1,13 +1,18 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.feed {
+  > .post { margin-top: 30px; }
+  width: 400px;
+  margin: 0px auto;
+}
+
 .profile-posts {
   > .post { margin-top: 30px; }
   width: 400px;
   display: block;
   margin: 0px auto;
 }
-
 
 .home-posts {
   > .post { margin-top: 30px; }
@@ -43,7 +48,7 @@
 
 .youlike {
   float: right;
-  color: orange;
+  color: lightgreen;
   font-size: .9rem;
 }
 

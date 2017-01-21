@@ -1,6 +1,6 @@
 class FriendRequestsController < ApplicationController
-   # rescue_from ActiveRecord::RecordInvalid, with: :show_errors
-
+  before_action :authenticate_user!
+  
   def index
     @friend_requests = current_user.friend_invitations
   end

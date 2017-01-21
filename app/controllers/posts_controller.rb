@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
   before_action :own_post?, only: :destroy
 
+  def feed
+    @posts = Post.latest
+    @comment = Comment.new
+  end
+
   def show
     @post = Post.find(params[:id])
   end

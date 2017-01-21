@@ -20,6 +20,7 @@ RSpec.describe UsersController, type: :controller do
       before :each do
         allow(User).to receive(:find).and_return user
         allow(Post).to receive(:new).and_return true
+        allow(Comment).to receive(:new).and_return true
       end
 
       let(:user) { double 'User Double', posts: user_posts_collection }
@@ -77,8 +78,17 @@ RSpec.describe UsersController, type: :controller do
         end
       end
 
+      describe 'it creates an instance of comment for the template' do
+        it 'calls #new on Comment' do
+          expect(Comment).to receive(:new)
+          get :show, params: { id: 'any' }
+        end
+
+        it 'assigns new comment instance to @comment' do
+          get :show, params: { id: 'any' }
+          expect(assigns :comment).to eq true
+        end
+      end
     end
-
   end
-
 end

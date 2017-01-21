@@ -23,18 +23,19 @@ Given(/^a user "([^"]*)" exists$/) do |arg1|
   first_second_name = arg1.split[0..-2].join(' ')
   last_name = arg1.split.last
   first_name_arr = first_second_name.split
-  user = create :user, first_name: first_name_arr.unshift(first_name_arr.shift.capitalize).join(' '), last_name: last_name.capitalize
+  create :user, first_name: first_name_arr.unshift(first_name_arr.shift.capitalize).join(' '), last_name: last_name.capitalize
   # email and username are dynamically created in the factory.
 end
 
 Given(/^a user "([^"]*)" is logged in$/) do |arg1|
-  first_second_name = arg1.split[0..-2].join(' ')
-  last_name = arg1.split.last
-  first_name_arr = first_second_name.split
-  user = create :user, first_name: first_name_arr.unshift(first_name_arr.shift.capitalize).join(' '), last_name: last_name.capitalize
-	login_as user, scope: :user
+  user = User.find_for_authentication(email: "#{arg1.split.first}.#{arg1.split.last}@example.com") || (step %{a user "#{arg1}" exists})
+  login_as user, scope: :user
   # email and username are dynamically created in the factory.
   @current_user = user
+  visit '/'
+  expect(page).to have_current_path '/'
+  expect(page).not_to have_text 'You need to sign in or sign up before continuing.
+'
 end
 
 Given(/^a user "([^"]*)" exists and I am on the sign in page$/) do |arg1|
@@ -53,7 +54,7 @@ When(/^I fill in valid registration details and click on "([^"]*)" button$/) do 
     choose 'Male'
     fill_in 'Password', with: 'foobar'
     fill_in 'Password confirmation', with: 'foobar'
-    step %{I click on "#{}" button}
+    step %{I click on "#{arg1}" button}
 
     @current_user = User.find_for_authentication(email: "pepe.bas@example.com")
   end
@@ -112,5 +113,5 @@ end
 
 Then(/^I should not see "([^"]*)" and "([^"]*)"$/) do |arg1, arg2|
 	expect(page).not_to have_text arg1
-	expect(page).not_to have_text arg1
+	expect(page).not_to have_text arg2
 end

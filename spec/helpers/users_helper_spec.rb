@@ -38,7 +38,10 @@ RSpec.describe UsersHelper, type: :helper do
 
   describe 'converts gender to English' do
     it 'displays full gender name from abberviation' do
+      user = build :user, gender: 'F'
       expect(helper.gender_english(@curr_user)).to eq 'Male'
+      expect(helper.gender_english(user)).to eq 'Female'
     end
   end
+
 end

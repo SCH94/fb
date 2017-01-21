@@ -15,7 +15,7 @@ RSpec.describe FriendRequestsController, type: :controller do
 
     let(:sent_requests) { double 'Sent Friend Requests Double', build: friend_request }
     let(:friend_request) { double 'Friend Requests Double', save: nil, errors: nil }
-    let(:requested_friend) { double 'Requested Friend Double' } # not being used 
+    let(:requested_friend) { double 'Requested Friend Double' } # not being used
     let(:requested) { create :user }
 
     context 'create friend request successfully' do
@@ -47,7 +47,7 @@ RSpec.describe FriendRequestsController, type: :controller do
       end
     end
   end
-  
+
 
   describe 'GET #index' do
     it 'renders http status success' do
@@ -88,7 +88,7 @@ RSpec.describe FriendRequestsController, type: :controller do
 
     it 'checks friend request has been deleted from database' do
       friend_request = create :friend_request, requested_friend: (create :user, first_name: 'Laura', last_name: 'Tarsi', gender: 'F')
-      expect{delete :destroy, params: { id: friend_request.to_param }}.to change(FriendRequest, :count).by -1
+      expect{delete :destroy, params: { id: friend_request.to_param }}.to change(FriendRequest, :count).by(-1)
     end
   end
 end

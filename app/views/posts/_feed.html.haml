@@ -8,6 +8,7 @@
       = link_to '...', post, method: :delete, data: { confirm: 'Are you surreeee? :p' }
   .content
     = simple_format post.content
+    -# = post.content
     .buttons
       = button_to 'Delete', post, method: :delete if post.user == current_user
       - unless post.likers.include? current_user
@@ -24,15 +25,12 @@
             = pluralize(post.likes.count, 'like')
         .youlike
           You like this
-  -# %hr/
-  - unless post.comments.empty?
-    .posted-comments
-      = render post.comments
-  .comment-form
-    .commentbox
-      = form_for @comment, url: post_comments_path(post) do |f|
-        = f.text_area :body, size: '30x3', placeholder: 'Write a comment...'
-        .commentbutton
-          = f.submit 'Comment'
-
-  
+- unless post.comments.empty?
+  .posted-comments
+    = render post.comments
+.comment-form
+  .commentbox
+    = form_for @comment, url: post_comments_path(post) do |f|
+      = f.text_area :body, size: '30x3', placeholder: 'Write a comment...'
+      .commentbutton
+        = f.submit 'Comment'
