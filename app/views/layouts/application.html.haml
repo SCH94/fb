@@ -9,6 +9,6 @@
     = render 'layouts/header'
     - flash.each do |message_type, message|
       - next if message_type == 'html_safe'
-      %div{:class => message_type}
+      %p{:class => message_type}
         = message
     = yield
