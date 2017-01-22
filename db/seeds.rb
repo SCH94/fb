@@ -11,7 +11,7 @@ Post.reset_pk_sequence
 Comment.reset_pk_sequence
 
 fnames = ['Pepe', 'Laura']
-lnames = ['Mangkopyo', 'Tarsi']
+lnames = ['Bas', 'Tarsi']
 gender = ['M', 'F']
 
 2.times do |i|

@@ -15,7 +15,7 @@
  */
 // header {
 //   border: solid green 2px;
-// }
+
 
 nav {
   display: flex;
@@ -38,16 +38,21 @@ body {
 }
 
 a:link {
-  color: rgb(162, 44, 244);
+  color: blue;
   text-decoration: none;
 }
 
 a:visited {
-  color: lightcoral;
+  color: indigo;
+  text-decoration: none;
+}
+
+a:visited:hover {
+  color: brown;
   text-decoration: none;
 }
 
 a:hover {
-  color: rgb(244, 44, 212);
+  color: violet;
   text-decoration: none;
 }

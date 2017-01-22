@@ -56,10 +56,10 @@ group :development, :test do
   gem 'irbtools-more', require: 'irbtools/binding'
   gem "factory_girl_rails", "~> 4.0"
   gem 'faker'
-  gem 'coveralls', require: false
   gem 'letter_opener'
   # Reset table primary keys when deleting all records
   gem 'activerecord-reset-pk-sequence'
+  gem 'coveralls', require: false
 end
 
 group :development do

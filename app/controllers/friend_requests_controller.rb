@@ -37,5 +37,4 @@ class FriendRequestsController < ApplicationController
       params.permit(:requested_friend_id)
     end
 
-
 end
