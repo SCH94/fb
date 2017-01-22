@@ -4,10 +4,23 @@
   %br/
   .profilepic
     .piccontainer
-      = image_tag @user.avatar_url(:thumb), class: 'pic' if @user.avatar?
+      = image_tag @user.avatar_url(:profile), class: 'pic' || Faker::Placeholdit.image('240x240')
+  - if fb_friend? @user
+    .fb-friend You are friends with this person
+  - else
+    - unless facebooker_current_user? @user
+      - unless request_sent? @user
+        = button_to 'Add friend', user_friend_requests_path(current_user, requested_friend_id: @user )
+      - else
+        %span{:style => 'color: lightcoral; font-style: oblique; font-size: 1.5rem;'} Friend request sent.
+  %br/
   %span{:style => 'color: lightcoral; font-style: oblique; font-size: .9rem;'}= @user.email
   %br/
 %h4= gender_english @user
+= link_to 'Friends', user_friends_path(current_user)
+%br
+%br
+	
 .profile-postsbox
   .postsbox
     Your thoughts
@@ -18,13 +31,6 @@
       .submitpost
         = f.submit
 
-- if fb_friend?
-  .fb-friend You are friends with this person
-- else
-  - if can_add_user
-    = button_to 'Add friend', user_friend_requests_path(current_user, requested_friend_id: @user )
-%br/
-= link_to 'Friends', user_friends_path(current_user)
 
 .profile-posts
   = render @posts

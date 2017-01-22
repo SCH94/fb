@@ -7,6 +7,7 @@ class FriendRequest < ApplicationRecord
   validate :duplicate
 
   delegate :first_name, :last_name, to: :friend_requestor, prefix: true
+  delegate :first_name, :last_name, to: :requested_friend, prefix: true
 
 
   private

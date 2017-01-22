@@ -1,6 +1,16 @@
-.friend
-	= user.first_name
-	|
-	= user.email
-	|
-%br/
+.facebooker
+  .pic-container
+    .avatar
+      = image_tag user.avatar_url(:thumb), class: 'avetar'
+  .user
+  = link_to "#{facebooker(user)}", user
+  - if user_signed_in?
+    - unless facebooker_current_user? user
+      - unless fb_friend? user
+        - unless request_sent? user
+          .addbutton
+            = button_to 'Add friend', user_friend_requests_path(current_user, requested_friend_id: user)
+        - else
+          %span{:style => 'color: lightcoral; font-style: oblique; font-size: 1.5rem;'} Friend request sent.
+      - else
+        .fb-friend You are friends with this person

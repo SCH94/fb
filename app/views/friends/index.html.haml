@@ -1,5 +1,6 @@
 .friendslist
 	%h2 Friends
-	= render @friends
+	- @friends.each do |friend|
+		= render partial: 'friends/friend', locals: { friend: friend }
 %br/
 = link_to 'Friend requests', user_friend_requests_path(current_user)

@@ -1,0 +1,6 @@
+.sentfriendrequest
+  .user
+    = link_to requested_friend_name(sent_friend_request), sent_friend_request.requested_friend
+  .sentfriendrequestbuttons
+    .cancel
+      = button_to 'Delete request', friend_request_path(sent_friend_request), method: :delete

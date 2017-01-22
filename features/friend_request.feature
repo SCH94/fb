@@ -11,8 +11,8 @@ Feature: Friend Request
     And I go to "Loren Burgos"'s profile page
     Then I should see "Loren Burgos"
     When I click on "Add friend" button
-    Then I should be on the home page
     And I should see "Friend request sent"
+    Then I should still be on "Loren Burgos"'s profile page
 
   Scenario: No Add friend button on self's profile page
     And I go to "Pepe Bas"'s profile page

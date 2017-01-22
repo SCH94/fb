@@ -1,4 +1,9 @@
 .friend-requests
-  %h2 Respond to your #{@friend_requests.count} Friend Requests
+  %h2 Respond to your #{pluralize(@friend_invitations.count, 'Friend Requests')}
   %ul
-    = render @friend_requests
+    = render @friend_invitations
+.sent-friend-requests
+  %h2 Sent friend requests
+  %ul
+    - @sent_friend_requests. each do |sent_friend_request|
+      = render partial: 'friend_requests/sent_friend_requests', locals: { sent_friend_request: sent_friend_request }

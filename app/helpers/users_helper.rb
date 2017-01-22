@@ -1,10 +1,12 @@
+# helpers for user resource in views
 module UsersHelper
-  def can_add_user
-    current_user != @user 
+
+  def facebooker_current_user?(user)
+    current_user == user
   end
 
-  def fb_friend?
-    current_user.fb_friends.include? @user
+  def fb_friend?(user)
+    current_user.fb_friends.include? user
   end
 
   def gender_english(user)
@@ -13,5 +15,9 @@ module UsersHelper
     when 'F' then 'Female'
     else 'Not specified'
     end
+  end
+
+  def facebooker(user)
+    user.first_name + ' ' + user.last_name
   end
 end

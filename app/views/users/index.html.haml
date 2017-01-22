@@ -1,2 +1,7 @@
-%h1 Users#index
-%p Find me in app/views/users/index.html.haml
+- if user_signed_in?
+  %h1.title Add friends!
+- else
+  %h1.title Join us on Facebook!
+%br
+.facebookers
+  = render @users

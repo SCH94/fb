@@ -66,14 +66,17 @@ RSpec.describe FriendRequestsController, type: :controller do
         friend_requests_index = spy 'Friend Requests Spy'
         allow(controller.current_user).to receive(:friend_invitations).and_return(friend_requests_index)
         get :index, params: { user_id: 'any'}
-        expect(assigns :friend_requests).to eq(friend_requests_index)
+        expect(assigns :friend_invitations).to eq(friend_requests_index)
       end
     end
   end
 
 
   describe 'DELETE #destroy' do
-    let(:friend_request) { double 'Friend Request Double', destroy: nil }
+    before do
+      allow(friend_request).to receive :friend_requestor
+    end
+    let(:friend_request) { double 'Friend Request Double', destroy: nil, friend_requestor: nil, friend_requestor_first_name: 'Ellen', friend_requestor_last_name: 'Adarna' }
 
     it 'finds resource' do
       expect(FriendRequest).to receive(:find).and_return(friend_request)

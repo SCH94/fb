@@ -6,9 +6,24 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'GET #index' do
+    let(:collection) { double 'Collection double' }
+
     it 'returns http success' do
       get :index
       expect(response).to have_http_status(:success)
+    end
+
+    context 'assigns collection for use in the view' do
+      it 'calls #all on User' do
+        expect(User).to receive(:all)
+        get :index
+      end
+
+      it 'assigns collection to @users' do
+        allow(User).to receive(:all)  { collection }
+        get :index
+        expect(assigns :users).to eq collection
+      end
     end
 
   end
@@ -30,7 +45,7 @@ RSpec.describe UsersController, type: :controller do
       describe 'it makes @user available to template' do
         it 'calls find on User' do
           expect(User).to receive(:find)
-          get :show, params: { id: @user.to_param } 
+          get :show, params: { id: @user.to_param }
         end
 
         it 'assigns resource to @user' do
@@ -57,7 +72,7 @@ RSpec.describe UsersController, type: :controller do
 
         it 'makes @post available to the template' do
           get :show, params: { id: 'any' }
-          expect(assigns :post).to eq true 
+          expect(assigns :post).to eq true
         end
       end
 
