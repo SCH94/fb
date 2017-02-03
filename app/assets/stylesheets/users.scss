@@ -1,6 +1,7 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/*
 .facebookers {
   > .facebooker { margin: 20px auto; }
 
@@ -20,9 +21,11 @@
   > .fieldfile { display: block; margin: 0px auto; }
 }
 
+*/
 .profilepic {
   > .piccontainer { border-bottom: 0; margin: 0; padding: 0;}
-  > .piccontainer > .pic {  padding: 12px 10px 32px 13px; margin: 10px 0 0 0; background: rgba(#cfe9f2, 0.72); border-radius: 10px; }
+  // > .piccontainer > .pic {  padding: 12px 10px 32px 13px; margin: 10px 0 0 0; background: rgba(#cfe9f2, 0.72); border-radius: 10px; }
+  display: inline-block;
   list-style-type: none;
   margin: 0;
   padding: 0;

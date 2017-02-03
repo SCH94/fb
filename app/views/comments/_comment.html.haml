@@ -1,7 +1,6 @@
-.posted-comment
+.card-panel.teal.small.hoverable
   .commenter
-    = link_to "#{commenter(comment)}", comment.commenter
+    = link_to "#{commenter(comment)}", comment.commenter, class: 'pink-text'
   .timeago
     = time_ago_in_words comment.created_at
-  .comment
-    = simple_format comment.body
+  %blockquote.white-text= simple_format comment.body

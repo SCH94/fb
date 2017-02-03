@@ -39,6 +39,10 @@ gem 'devise'
 gem 'omniauth-facebook'
 # User MiniMagick
 gem "mini_magick"
+# Materialize CSS
+gem 'materialize-sass'
+# Selenium web-driver
+gem 'selenium-webdriver'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -46,6 +50,10 @@ gem "mini_magick"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+# Reset table primary keys when deleting all records
+gem 'activerecord-reset-pk-sequence'
+gem "factory_girl_rails", "~> 4.0"
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -54,11 +62,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'pry-byebug'
   gem 'irbtools-more', require: 'irbtools/binding'
-  gem "factory_girl_rails", "~> 4.0"
-  gem 'faker'
   gem 'letter_opener'
-  # Reset table primary keys when deleting all records
-  gem 'activerecord-reset-pk-sequence'
   gem 'coveralls', require: false
 end
 

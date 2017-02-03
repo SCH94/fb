@@ -1,51 +1,54 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true })  do |f|
-  = devise_error_messages!
-  .field
-    = f.label :first_name, 'First name'
-    %br/
-    = f.text_field :first_name, autofocus: true, class: 'firstname'
-  .field
-    = f.label :last_name, 'Last name'
-    %br/
-    = f.text_field :last_name, autofocus: true, class: 'lastname'
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, class: 'email'
-  .field
-    = f.label :username, 'Username'
-    %br/
-    = f.text_field :username, autofocus: true, class: 'username'
-  .field
-    = f.label :gender, 'Gender'
+.registration
+  %h2 Sign up
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true })  do |f|
+    = devise_error_messages!
+    .input-field
+      = f.label :first_name, 'First name'
+      %br/
+      = f.text_field :first_name, autofocus: true, class: 'firstname'
+    .input-field
+      = f.label :last_name, 'Last name'
+      %br/
+      = f.text_field :last_name, autofocus: true, class: 'lastname'
+    .input-field
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true, class: 'email'
+    .input-field
+      = f.label :username, 'Username'
+      %br/
+      = f.text_field :username, autofocus: true, class: 'username'
+    .field
+      = f.label :gender, 'Gender'
+      %br/
+      .field
+        = f.radio_button :gender, 'M'
+        = f.label :gender_m, 'Male'
+        = f.radio_button :gender, 'F'
+        = f.label :gender_f, 'Female'
     %br/
     .field
-      = f.label :gender_m, 'Male'
-      = f.radio_button :gender, 'M', class: 'gendermale'
-      = f.label :gender_f, 'Female'
-      = f.radio_button :gender, 'F', class: 'genderfemale'
-  %br/
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
+      = f.label :password
+      - if @minimum_password_length
+        %em
+          (#{@minimum_password_length} characters minimum)
+      = f.password_field :password, autocomplete: "off", class: 'password'
+    .input-field
+      = f.label :password_confirmation, 'Password confirmation'
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "off", class: 'passwordconfirmation'
     %br/
-    = f.password_field :password, autocomplete: "off", class: 'password'
-  .field
-    = f.label :password_confirmation, 'Password confirmation'
+    = image_tag @user.avatar_url(:profile) if @user.avatar?
+    .file-field.input-field
+      .btn
+        %span Photo
+        = f.file_field :avatar
+        = f.hidden_field :avatar_cache
+      .file-path-wrapper
+        %input{ :type => "text", :class => "file-path validate" }/
+    %br
+    .actions.right
+      = f.button "Create Account", class: 'btn waves-effect waves-light indigo lighten-2'
     %br/
-    = f.password_field :password_confirmation, autocomplete: "off", class: 'passwordconfirmation'
-  %br/
-  .field
-    = image_tag @user.avatar_url if @user.avatar?
-    = f.file_field :avatar
-    = f.hidden_field :avatar_cache
-  %br
+    = link_to 'Back to log in', new_user_session_path, class: 'left'
 
-  .actions
-    = f.submit "Create Account"
-  %br/
-  = link_to 'Sign in with Facebook!', user_facebook_omniauth_authorize_path
-= render "devise/shared/links"

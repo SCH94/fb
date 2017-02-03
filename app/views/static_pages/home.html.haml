@@ -1,14 +1,21 @@
-%h1 StaticPages#home
-.home-postsbox
-  .postsbox
-    Your thoughts
-    %br/
-    = form_for @post, url: user_posts_path(current_user) do |f|
-      = f.text_area :content, size: '50x5'
-      %br/
-      .submitpost
-        = f.submit
-
-.home-posts
-  = render @posts
-  
+.container
+  .row
+    .col.s12.center
+      %h2
+        Good day!
+  .row
+    .col.s12
+      .home-postsbox.center
+        .postsbox
+          = form_for @post, url: user_posts_path(current_user) do |f|
+            .input-field
+              = f.label :content, "How's your day?"
+              = f.text_area :content, size: '50x5', class: 'materialize-textarea'
+              %br/
+            .submitpost
+              = f.button class: 'btn waves-light waves-effect right' do
+                Post
+                %i.material-icons.right mode_edit
+  .section
+    .home-posts
+      = render @posts

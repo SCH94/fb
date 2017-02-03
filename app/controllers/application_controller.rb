@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
       sign_in_url = new_user_session_url
       if request.referer == sign_in_url
         super
+      elsif request.referrer == user_facebook_omniauth_authorize_url && resource.sign_in_count == 1
+        resource
+      elsif request.referrer == user_facebook_omniauth_authorize_url && resource.sign_in_count > 1
+        root_path
       else
         stored_location_for(resource) || request.referer || root_path
       end
@@ -20,6 +24,6 @@ class ApplicationController < ActionController::Base
 
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :username, :gender, :avatar])
-      devise_parameter_sanitizer.permit(:account_update, keys: [:avatar])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :gender])
     end
 end

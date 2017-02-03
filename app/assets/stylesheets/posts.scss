@@ -1,69 +1,72 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.feed {
-  > .post { margin-top: 30px; }
-  width: 400px;
-  margin: 0px auto;
+// .feed {
+//   > .post { margin-top: 30px; }
+//   width: 400px;
+//   margin: 0px auto;
+// }
+//
+// .profile-posts {
+//   > .post { margin-top: 30px; }
+//   width: 400px;
+//   display: block;
+//   margin: 0px auto;
+// }
+
+// .home-posts {
+//   > .post { margin-top: 30px; }
+//   width: 400px;
+//   display: block;
+//   margin: 0px auto;
+// }
+
+// .post {
+//   background: DeepSkyBlue;
+//   border: 1px solid black;
+//   border-radius: 20px;
+//   padding: 5px;
+// }
+
+
+// .buttons {
+//   > .likepanel { display: inline-block; }
+//   > .youlike { margin: 5px 10px 0 0 }
+// }
+//
+// .likebutton {
+//   display: inline-block;
+// }
+//
+// .likebuttoncount {
+// }
+//
+// .likecount {
+//   display: inline-block;
+//   color: blue;
+// }
+//
+// .youlike {
+//   float: right;
+//   color: lightgreen;
+//   font-size: .9rem;
+// }
+//
+// .new_post {
+//   display: inline-block;
+// }
+
+// .postowner {
+//   > .name { font-size: .8em; font-style: oblique; color: yellow; }
+//   > .elapsed { font-size: .8em; font-style: oblique; color: yellow; }
+//   display: block;
+//   text-align: right;
+// }
+
+.card-title {
+  > .elapsed { font-size: .5em; }
 }
 
-.profile-posts {
-  > .post { margin-top: 30px; }
-  width: 400px;
-  display: block;
-  margin: 0px auto;
-}
-
-.home-posts {
-  > .post { margin-top: 30px; }
-  width: 400px;
-  display: block;
-  margin: 0px auto;
-}
-
-.post {
-  background: DeepSkyBlue;
-  border: 1px solid black;
-  border-radius: 20px;
-  padding: 5px;
-}
-
-
-.buttons {
-  > .likepanel { display: inline-block; }
-  > .youlike { margin: 5px 10px 0 0 }
-}
-
-.likebutton {
-  display: inline-block;
-}
-
-.likebuttoncount {
-}
-
-.likecount {
-  display: inline-block;
-  color: blue;
-}
-
-.youlike {
-  float: right;
-  color: lightgreen;
-  font-size: .9rem;
-}
-
-.new_post {
-  display: inline-block;
-}
-
-.submitpost {
-  display: inline-block;
-  float: right;
-}
-
-.postowner {
-  > .name { font-size: .8em; font-style: oblique; color: yellow; }
-  > .elapsed { font-size: .8em; font-style: oblique; color: yellow; }
-  display: block;
-  text-align: right;
+.postsbox {
+  width: 90%;
 }

@@ -37,6 +37,10 @@ app/channels
 # .eslintrc
 # .rubocop.yml
 # coffeelint.json
+.sass-cache
 
 # Ignore application configuration
 /config/application.yml
+
+# Public uploads
+public/uploads

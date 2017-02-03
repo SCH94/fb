@@ -6,25 +6,25 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
 
-  has_many :sent_friend_requests, class_name: 'FriendRequest', foreign_key: 'friend_requestor_id'
+  has_many :sent_friend_requests, class_name: 'FriendRequest', foreign_key: 'friend_requestor_id', dependent: :destroy
   has_many :requested_friends, through: :sent_friend_requests
 
-  has_many :friend_invitations, class_name: 'FriendRequest', foreign_key: 'requested_friend_id'
+  has_many :friend_invitations, class_name: 'FriendRequest', foreign_key: 'requested_friend_id', dependent: :destroy
   has_many :friend_requestors, through: :friend_invitations
 
-  has_many :friends, foreign_key: 'friender_id'
+  has_many :friends, foreign_key: 'friender_id', dependent: :destroy
   has_many :friendees, through: :friends
 
-  has_many :friends, foreign_key: 'friendee_id'
+  has_many :friends, foreign_key: 'friendee_id', dependent: :destroy
   has_many :frienders, through: :friends
 
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :posts_liked, through: :likes, source: :post
 
-  has_many :comments, foreign_key: 'commenter_id'
+  has_many :comments, foreign_key: 'commenter_id', dependent: :destroy
   has_many :posts_commented, through: :comments, source: :post
 
   mount_uploader :avatar, AvatarUploader
@@ -43,6 +43,8 @@ class User < ApplicationRecord
       user.first_name = auth.info.name.split[0..-2].join(' ')
       user.last_name = auth.info.name.split.last
       user.username = auth.info.name.split.first.downcase
+      user.remote_avatar_url = auth.info.image
+      UserMailer.welcome_email(user).deliver_now
     end
   end
 

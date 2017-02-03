@@ -1,6 +1,9 @@
-.sentfriendrequest
-  .user
-    = link_to requested_friend_name(sent_friend_request), sent_friend_request.requested_friend
-  .sentfriendrequestbuttons
-    .cancel
-      = button_to 'Delete request', friend_request_path(sent_friend_request), method: :delete
+.row
+  .col.s12
+    .card.horizontal
+      .card-image
+        = image_tag sent_friend_request.requested_friend.avatar_url(:profile), class: 'avetar activator'
+      .card-stacked
+        .card-content
+          %p= link_to facebooker(sent_friend_request.requested_friend), sent_friend_request.requested_friend
+        .card-action= link_to 'Delete request', friend_request_path(sent_friend_request), method: :delete

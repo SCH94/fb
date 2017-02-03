@@ -3,12 +3,12 @@
   %head
     %title Facebook
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', 'https://fonts.googleapis.com/icon?family=Material+Icons', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render 'layouts/header'
     - flash.each do |message_type, message|
       - next if message_type == 'html_safe'
       %p{:class => message_type}
-        = message
+        .center-align= message
     = yield

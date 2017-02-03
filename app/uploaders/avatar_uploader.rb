@@ -19,12 +19,12 @@ class AvatarUploader < CarrierWave::Uploader::Base
     # For Rails 3.1+ asset pipeline compatibility:
     # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
     # "fallback/" + [version_name, "default.png"].compact.join('_')
-    "http://lorempixel.com/140/140"
+    "http://lorempixel.com/300/300"
   end
 
   # Process files as they are uploaded:
   # process scale: [200, 300]
-    process resize_to_fit: [500, 500]
+    # process resize_to_fit: [500, 500]
 
   # def scale(width, height)
   #   # do something
@@ -32,7 +32,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :profile do
-    process resize_to_fit: [240, 240]
+    process resize_to_fit: [290, 290]
   end
 
   version :thumb do

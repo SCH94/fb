@@ -2,24 +2,40 @@ require 'rails_helper'
 
 RSpec.describe FriendsController, type: :controller do
   describe 'GET #index' do
+    before :example do
+      allow(User).to receive(:find) { friend }
+      allow(friend).to receive(:fb_friends) { true }
+    end
+
+    let(:friend) { double 'Friend double' }
+
     it 'returns http success' do
-      sign_in user = create(:user)
-      get :index, params: { user_id: user.to_param }
+      get :index, params: { user_id: 'any' }
       expect(response).to have_http_status :success
       expect(response).to render_template :index
     end
 
-    it 'calls #fb_friends on current_user' do
-      sign_in create(:user)
-      expect(controller.current_user).to receive(:fb_friends).and_return true
+    it 'calls find on User' do
+      expect(User).to receive(:find) { friend }
       get :index, params: { user_id: 'any' }
     end
 
+    it 'calls #fb_friends on @user' do
+      expect(friend).to receive(:fb_friends)
+      get :index, params: { user_id: 'any' }
+    end
+
+    it 'makes @user available to the template' do
+      get :index, params: { user_id: 'any' }
+      expect(assigns :user).to eq friend
+      
+    end
+
     it 'makes @friends available to the template' do
-      allow(controller.current_user).to receive(:fb_friends).and_return true
       get :index, params: { user_id: 'any' }
       expect(assigns :friends).to eq true
     end
+
   end
 
   describe 'POST #create' do

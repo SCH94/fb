@@ -19,8 +19,13 @@ class PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to current_user, notice: 'Post deleted.' and return if request.referrer == post_url
-    redirect_back fallback_location: current_user, notice: 'Post deleted.'
+    respond_to do |format|
+      format.js
+      format.html do
+        redirect_to current_user, notice: 'Post deleted.' and return if request.referrer == post_url
+        redirect_back fallback_location: current_user, notice: 'Post deleted.'
+      end
+    end
   end
 
   private

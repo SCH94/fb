@@ -1,11 +1,21 @@
 %header
-  = link_to 'Facebook', root_path, id: 'logo'
-  %nav.nav
-    .nav-signed-out
-      = link_to 'Users', users_path
-    - if user_signed_in?
-      .nav-signed-in
-        = link_to 'Feed', feed_user_posts_path(current_user)
-        = link_to 'Profile', current_user
-        = link_to 'Edit Profile', edit_user_registration_path
-        = link_to 'Sign out', destroy_user_session_path, method: :delete
+  %nav
+    .nav-wrapper
+      = link_to 'Facebook', root_path, class: 'brand-logo'
+      = link_to '#', class: 'button-collapse', data: { activates: 'mobile-demo' } do
+        %i.material-icons menu
+      %ul.right.hide-on-med-and-down#nav-mobile
+        %li
+          = link_to 'Users', users_path
+        - if user_signed_in?
+          %li= link_to 'Home', root_path
+          %li= link_to 'Profile', current_user
+          %li= link_to 'Edit Profile', edit_user_registration_path
+          %li= link_to 'Sign out', destroy_user_session_path, method: :delete
+      %ul.side-nav#mobile-demo
+        %li= link_to 'Users', users_path
+        - if user_signed_in?
+          %li= link_to 'Home', root_path
+          %li= link_to 'Profile', current_user
+          %li= link_to 'Edit Profile', edit_user_registration_path
+          %li= link_to 'Sign out', destroy_user_session_path, method: :delete

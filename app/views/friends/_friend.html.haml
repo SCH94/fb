@@ -1,6 +1,27 @@
-.friend
-	= friend.first_name
-	|
-	= friend.email
-	|
-%br/
+.col.s4
+  .card
+    .card-image.waves-effect.waves-light.waves-block
+      = image_tag friend.avatar_url, class: 'activator', alt: 'profile picture'
+    .card-content
+      %span.card-title.activator
+        = facebooker friend
+        %i.material-icons.right more_vert
+      - if user_signed_in?
+        - unless facebooker_current_user? friend
+          - unless fb_friend? friend
+            - unless request_sent? friend
+              %p= link_to 'Add friend', user_friend_requests_path(current_user, requested_friend_id: friend), method: :post
+    .card-reveal
+      %span.card-title.grey-text.text-darken-4
+        = link_to facebooker(friend), friend
+        %i.material-icons.right close
+      %p{:style => 'color: lightblue; font-style: oblique; font-size: 1rem;'}= friend.email
+      %p{:style => 'color: lightcoral; font-style: oblique; font-size: .9rem;'}= gender_english friend
+      .section
+        - if user_signed_in?
+          - unless facebooker_current_user? friend
+            - unless fb_friend? friend
+              - if request_sent? friend
+                %p{:style => 'color: lightcoral; font-style: oblique; font-size: 1.2rem;'} Friend request sent.
+            - else
+              %p{:style => 'color: purple; font-style: oblique; font-size: 1.2rem;'} You are friends with this person

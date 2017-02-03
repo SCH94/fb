@@ -13,13 +13,13 @@
  *= require_tree .
  *= require_self
  */
-// header {
-//   border: solid green 2px;
+@import "materialize/components/color";
+$primary-color: color("indigo", "base") !default;
+$secondary-color: color("pink", "base") !default;
+@import 'materialize';
 
-
-nav {
-  display: flex;
-  justify-content: flex-end;
+.brand-logo {
+  margin-left: 10px;
 }
 
 .alert {
@@ -31,28 +31,4 @@ nav {
   color: green;
   font-weight: bold;
   text-shadow: 1px 1px 3px cyan;
-}
-
-body {
-  text-align: center;
-}
-
-a:link {
-  color: blue;
-  text-decoration: none;
-}
-
-a:visited {
-  color: indigo;
-  text-decoration: none;
-}
-
-a:visited:hover {
-  color: brown;
-  text-decoration: none;
-}
-
-a:hover {
-  color: violet;
-  text-decoration: none;
 }

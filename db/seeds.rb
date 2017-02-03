@@ -11,34 +11,32 @@ Post.reset_pk_sequence
 Comment.reset_pk_sequence
 
 fnames = ['Pepe', 'Laura']
-lnames = ['Bas', 'Tarsi']
+lnames = ['Bas', 'Holden']
 gender = ['M', 'F']
 
 2.times do |i|
   FactoryGirl.create :user, first_name: fnames[i], last_name: lnames[i], gender: gender[i]
 end
 
-3.times do
+20.times do
   FactoryGirl.create :user, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, gender: 'F'
 end
 
-user3 = User.third
-user4 = User.fourth
-user5 = User.fifth
-users = [user3, user4, user5]
+all = User.all
+users = all[2..21]
 
 pepe = User.find_by_first_name 'Pepe'
 laura = User.find_by_first_name 'Laura'
-pepelaura = [pepe, laura]
+pepe_and_laura = [pepe, laura]
 
 # Pepe's and Laura's posts
 20.times do
-  FactoryGirl.create :post, content: Faker::Hipster.paragraphs(3), user: pepelaura[rand 0..1]
+  FactoryGirl.create :post, content: Faker::Hipster.paragraphs(3), user: pepe_and_laura[rand 0..1]
 end
 
 # Comments
 3.times do
   20.times do |e|
-    FactoryGirl.create :comment, body: Faker::Hipster.paragraphs(1), commenter: users[rand 0..2], post: Post.find(e+1)
+    FactoryGirl.create :comment, body: Faker::Hipster.paragraphs(1), commenter: users[rand 0..19], post: Post.find(e+1)
   end
 end

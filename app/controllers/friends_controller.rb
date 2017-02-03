@@ -1,7 +1,8 @@
 class FriendsController < ApplicationController
 
   def index
-		@friends = current_user.fb_friends
+    @user = User.find(params[:user_id])
+		@friends = @user.fb_friends
   end
 
   def create

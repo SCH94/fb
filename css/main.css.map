@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,MAAO;EACL,gBAAgB,EAAE,IAAI;;AAGxB,OAAQ;EACN,gBAAgB,EAAE,MAAM;;AAG1B,KAAM;EACJ,gBAAgB,EAAE,IAAI",
-"sources": ["../../YouTube/sass/main.scss"],
-"names": [],
-"file": "main.css"
-}

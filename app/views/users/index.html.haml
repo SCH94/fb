@@ -1,7 +1,10 @@
 - if user_signed_in?
-  %h1.title Add friends!
+  %h4.left-align Add friends
 - else
-  %h1.title Join us on Facebook!
-%br
-.facebookers
-  = render @users
+  %h4.center-align Join us on Facebook!
+.section
+  .container.facebookers
+    - @users.in_groups_of(3, false) do |group|
+      .row
+        - group.each do |user|
+          = render partial: 'users/user', locals: { user: user }

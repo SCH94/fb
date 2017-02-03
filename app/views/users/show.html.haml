@@ -1,36 +1,33 @@
-%h1
-  = @user.first_name
-  = @user.last_name
-  %br/
-  .profilepic
-    .piccontainer
-      = image_tag @user.avatar_url(:profile), class: 'pic' || Faker::Placeholdit.image('240x240')
-  - if fb_friend? @user
-    .fb-friend You are friends with this person
-  - else
-    - unless facebooker_current_user? @user
-      - unless request_sent? @user
-        = button_to 'Add friend', user_friend_requests_path(current_user, requested_friend_id: @user )
-      - else
-        %span{:style => 'color: lightcoral; font-style: oblique; font-size: 1.5rem;'} Friend request sent.
-  %br/
-  %span{:style => 'color: lightcoral; font-style: oblique; font-size: .9rem;'}= @user.email
-  %br/
-%h4= gender_english @user
-= link_to 'Friends', user_friends_path(current_user)
-%br
-%br
-	
-.profile-postsbox
-  .postsbox
-    Your thoughts
-    %br/
-    = form_for @post, url: user_posts_path(current_user) do |f|
-      = f.text_area :content, size: '50x5'
-      %br/
-      .submitpost
-        = f.submit
-
-
-.profile-posts
-  = render @posts
+.container
+  .section
+    .row
+      .col.s12.center
+        .profilepic
+          .piccontainer
+            = image_tag @user.avatar_url(:profile), class: 'profile picture'
+        %h4= facebooker(@user)
+        %p= link_to 'Friends', user_friends_path(@user)
+        - if fb_friend? @user
+          .fb-friend You are friends with this person
+        - else
+          - unless facebooker_current_user? @user
+            - unless request_sent? @user
+              = button_to 'Add friend', user_friend_requests_path(current_user, requested_friend_id: @user ), class: 'btn waves-effect waves-light'
+            - else
+              %span{:style => 'color: lightcoral; font-style: oblique; font-size: 1.5rem;'} Friend request sent.
+    - if facebooker_current_user? @user
+      .row
+        .col.s12
+          .profile-postsbox
+            .postsbox
+              = form_for @post, url: user_posts_path(current_user) do |f|
+                .input-field
+                  = f.label :content, 'Post your status'
+                  = f.text_area :content, class: 'materialize-textarea'
+                .submitpost.right-align
+                  = f.button class: 'btn waves-light waves-effect' do
+                    Post
+                    %i.material-icons.right mode_edit
+    .section
+      .profile-posts
+        = render @posts

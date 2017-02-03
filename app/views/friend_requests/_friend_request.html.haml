@@ -1,8 +1,12 @@
-.friendrequest
-  .user
-    = friend_requestor_name(friend_request)
-  .friendrequestbuttons
-    .confirmbutton
-      = button_to 'Confirm', user_friends_path(current_user, friender_id: friend_request.friend_requestor)
-    .deleterequestbutton
-      = button_to 'Delete request', friend_request_path(friend_request), method: :delete
+.row
+  .col.s12
+    .card.medium
+      .card-image
+        = image_tag friend_request.friend_requestor.avatar_url, class: 'avetar activator'
+        %span.card-title=friend_requestor_name(friend_request)
+      .card-content
+        %p{:style => 'color: lightblue; font-style: oblique; font-size: 1rem;'}= friend_request.friend_requestor.email
+        %p{:style => 'color: lightcoral; font-style: oblique; font-size: .9rem;'}= gender_english friend_request.friend_requestor
+      .card-action
+        = link_to 'Confirm', user_friends_path(current_user, friender_id: friend_request.friend_requestor), method: :post
+        = link_to 'Delete request', friend_request_path(friend_request), method: :delete

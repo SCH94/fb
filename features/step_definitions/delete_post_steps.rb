@@ -21,3 +21,9 @@ Then(/^I should be logged out with the message "([^"]*)"$/) do |arg1|
   expect(page).to have_text arg1
   visit '/'
 end
+
+When(/^click on "([^"]*)" on post "([^"]*)"$/) do |arg1, arg2|
+  within '.card', text: arg2 do
+    click_link arg1
+  end
+end

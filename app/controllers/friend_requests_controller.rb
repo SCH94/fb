@@ -25,9 +25,9 @@ class FriendRequestsController < ApplicationController
     fr = FriendRequest.find(params[:id])
     fr.destroy
     if fr.friend_requestor != current_user
-      redirect_to user_friend_requests_path(current_user), notice: "Deleted friend request by #{helpers.link_to helpers.friend_requestor_name(fr), fr.friend_requestor}", flash: { html_safe: true }
+      redirect_to user_friend_requests_path(current_user), notice: "Deleted received friend request by #{helpers.link_to helpers.friend_requestor_name(fr), fr.friend_requestor}", flash: { html_safe: true }
     else
-      redirect_to user_friend_requests_path(current_user), notice: "Deleted friend request sent to #{helpers.link_to helpers.requested_friend_name(fr), fr.requested_friend}", flash: { html_safe: true }
+      redirect_to user_friend_requests_path(current_user), notice: "Deleted sent friend request to #{helpers.link_to helpers.requested_friend_name(fr), fr.requested_friend}", flash: { html_safe: true }
     end
   end
 

@@ -1,38 +1,35 @@
-.post
-  .postowner
-    .name
-      = post_owner(post)
-    .elapsed
-      = time_ago_in_words post.created_at
-    .deletepost
-      = link_to '...', post, method: :delete, data: { confirm: 'Are you surreeee? :p' }
-  .content
-    = simple_format post.content
-    .buttons
-      = button_to 'Delete', post, method: :delete if post.user == current_user
-      - unless post.likers.include? current_user
-        .likepanel
-          .likebutton
-            = button_to 'Like', post_likes_path(post)
-          .likecount
+.divider
+.section
+  .row
+    .col.s12.m6
+      .card
+        .card-content
+          .card-title
+            = post_owner(post)
+            .elapsed.right= time_ago_in_words post.created_at
+          .content.center
+            %br/
+            .flow-text= simple_format post.content
+        .card-action
+          = link_to 'Delete', post, method: :delete, remote: true if post.user == current_user
+          - unless post.likers.include? current_user
+            = link_to 'Like', post_likes_path(post), method: :post
             = pluralize(post.likes.count, 'like')
-      - else
-        .likepanel
-          .likebutton
-            = button_to 'Unlike', post_likes_path(post)
-          .likecount
+          - else
+            = link_to 'Unlike', post_likes_path(post), method: :post
             = pluralize(post.likes.count, 'like')
-        .youlike
-          You like this
-  -# %hr/
-  - unless post.comments.empty?
-    .posted-comments
-      = render post.comments
-  .comment-form
-    .commentbox
-      = form_for @comment, url: post_comments_path(post) do |f|
-        = f.text_area :body, size: '30x3', placeholder: 'Write a comment...'
-        .commentbutton
-          = f.submit 'Comment'
+            .right
+              %i.small.material-icons.left thumb_up
+              You like this
+    .col.s12.m6
+      - unless post.comments.empty?
+        .posted-comments
+          = render post.comments
+      .comment-form
+        .commentbox
+          = form_for @comment, url: post_comments_path(post) do |f|
+            .input-field
+              = f.text_area :body, size: '30x3', placeholder: 'Write a comment...', class: 'materialize-textarea'
+            .commentbutton
+              = f.button 'Comment', class: 'btn waves-effect waves-light'
 
-  

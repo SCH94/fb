@@ -4,26 +4,26 @@ RSpec.describe FriendRequestsHelper, type: :helper do
   let(:user) { create :user } # for use in second example
 
   describe "concatenates friend requestor's name" do
-    it "concats friend requestor's first and last name wrapped in <li> tags" do
+    it "concats friend requestor's first and last name" do
       friend_request = create :friend_request
-      expect(helper.friend_requestor_name(friend_request)).to eq('<li>Pepe Bas</li>')
+      expect(helper.friend_requestor_name(friend_request)).to eq('Pepe Bas')
     end
 
-    it "concats friend requestor's first and last name wrapped in <li> tags" do
+    it "concats friend requestor's first and last name" do
       friend_request = create :friend_request, friend_requestor: (create :user, first_name: 'Valeen', last_name: 'Montenegro'), requested_friend: user
-      expect(helper.friend_requestor_name(friend_request)).to eq('<li>Valeen Montenegro</li>')
+      expect(helper.friend_requestor_name(friend_request)).to eq('Valeen Montenegro')
     end
   end
 
   describe "concatenates friend requestee's name" do
     it "concats friend requestee's first and last name wrapped in <li> tags" do
       friend_request = create :friend_request
-      expect(helper.requested_friend_name(friend_request)).to eq('<li>Loren Burgos</li>')
+      expect(helper.requested_friend_name(friend_request)).to eq('Loren Burgos')
     end
 
     it "concats friend requestees's first and last name wrapped in <li> tags" do
       friend_request = create :friend_request, friend_requestor: user, requested_friend: (create :user, first_name: 'Valeen', last_name: 'Montenegro')
-      expect(helper.requested_friend_name(friend_request)).to eq('<li>Valeen Montenegro</li>')
+      expect(helper.requested_friend_name(friend_request)).to eq('Valeen Montenegro')
     end
   end
 

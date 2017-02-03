@@ -1,42 +1,62 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  .field
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password, autocomplete: "off"
-    - if @minimum_password_length
+.edit-user
+  %h2
+    Edit #{resource_name.to_s.humanize}
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = devise_error_messages!
+    .field
+      = f.label :email
+      = f.email_field :email, autofocus: true
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      %div
+        Currently waiting confirmation for: #{resource.unconfirmed_email}
+    .field
+      = f.label :gender
+      = f.radio_button :gender, 'M'
+      = f.label :gender_m, 'Male'
+      = f.radio_button :gender, 'F'
+      = f.label :gender_f, 'Female'
       %br/
-      %em
-        = @minimum_password_length
-        characters minimum
-  .field
-    = f.label :password_confirmation
+      %br/
+    .field
+      = f.label :password
+      %i (leave blank if you don't want to change it)
+      %br/
+      = f.password_field :password, autocomplete: "off"
+      - if @minimum_password_length
+        %br/
+        %em
+          = @minimum_password_length
+          characters minimum
+      %br/
+      %br/
+    .field
+      = f.label :password_confirmation
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "off"
+    .field
+      = f.label :current_password
+      %i (we need your current password to confirm your changes)
+      %br/
+      = f.password_field :current_password, autocomplete: "off"
     %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password, autocomplete: "off"
-  .fieldimage
-    = image_tag @user.avatar_url if @user.avatar?
-  .fieldfile
-    = f.file_field :avatar
-    = f.hidden_field :avatar_cache
-  %br
-  .actions
-    = f.submit "Update"
-%h3 Cancel my account
-%p
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
-= link_to "Back", :back
+    = image_tag @user.avatar_url(:profile) if @user.avatar?
+    .file-field.input-field
+      .btn
+        %span Photo
+        = f.file_field :avatar
+        = f.hidden_field :avatar_cache
+      .file-path-wrapper
+        %input{ :class => "file-path validate", :type => "text" }/
+    %br
+    %br
+    .actions.right-align
+      = f.button "Update", class: 'btn waves-effect waves-light indigo lighten-2'
+  %br/
+  %br/
+  %br/
+  .divider
+  .section
+    %h3 Cancel my account
+    %p
+      Unhappy? #{button_to "Cancel my account", registration_path(resource_name), class: 'btn waves-effect waves-light black', data: { confirm: "Are you sure?" }, method: :delete}
+    = link_to "Back", :back

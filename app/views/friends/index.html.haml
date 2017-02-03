@@ -1,6 +1,10 @@
-.friendslist
-	%h2 Friends
-	- @friends.each do |friend|
-		= render partial: 'friends/friend', locals: { friend: friend }
-%br/
-= link_to 'Friend requests', user_friend_requests_path(current_user)
+.container
+  %h4.center-align Friends
+  - if facebooker_current_user? @user
+    = link_to 'Friend requests', user_friend_requests_path(current_user), class: 'right'
+  .section
+    .facebookers
+      - @friends.in_groups_of(3, false) do |group|
+        .row
+          - group.each do |friend|
+            = render partial: 'friends/friend', locals: { friend: friend }
