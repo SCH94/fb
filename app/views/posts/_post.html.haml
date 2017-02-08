@@ -1,35 +1,32 @@
-.divider
-.section
-  .row
-    .col.s12.m6
-      .card
-        .card-content
-          .card-title
-            = post_owner(post)
-            .elapsed.right= time_ago_in_words post.created_at
-          .content.center
-            %br/
-            .flow-text= simple_format post.content
-        .card-action
-          = link_to 'Delete', post, method: :delete, remote: true if post.user == current_user
-          - unless post.likers.include? current_user
-            = link_to 'Like', post_likes_path(post), method: :post
-            = pluralize(post.likes.count, 'like')
-          - else
-            = link_to 'Unlike', post_likes_path(post), method: :post
-            = pluralize(post.likes.count, 'like')
-            .right
-              %i.small.material-icons.left thumb_up
-              You like this
-    .col.s12.m6
-      - unless post.comments.empty?
+.post{:id => "#{post.id}"}
+  .divider
+  .section
+    .row
+      .col.s12.m6
+        .card
+          .card-content
+            .card-title
+              = post_owner(post)
+              .elapsed.right= time_ago_in_words post.created_at
+            .content.center
+              %br/
+              .flow-text= simple_format post.content
+          .card-action
+            = link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure you want to remove this post?' }, remote: true if post.user == current_user
+            .like-form
+              - unless post.likers.include? current_user
+                = render 'likes/like', post: post
+              - else
+                = render 'likes/unlike', post: post
+                = render 'likes/like_this.js', post: post # OPTIMIZE transfer JS code to assets/javascripts/users/show.js
+      .col.s12.m6
         .posted-comments
-          = render post.comments
-      .comment-form
-        .commentbox
-          = form_for @comment, url: post_comments_path(post) do |f|
+          - unless post.comments.empty?
+            = render post.comments.sort
+        .comment-form
+          = form_for @comment, url: post_comments_path(post), remote: true do |f|
             .input-field
-              = f.text_area :body, size: '30x3', placeholder: 'Write a comment...', class: 'materialize-textarea'
+              <textarea class="materialize-textarea" id="comment_body" name="comment[body]" placeholder="Write a comment..."></textarea>
             .commentbutton
               = f.button 'Comment', class: 'btn waves-effect waves-light'
-
+            .comment-error-messages

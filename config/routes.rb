@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show], shallow: true do
+    get 'feed', on: :collection
     resources :friend_requests, only: [:index, :create, :destroy]
     resources :friends, only: [:index, :create, :destroy]
     resources :posts, only: [:show, :create, :destroy] do
-      resources :likes, only: [:create]
-      resources :comments
-      get 'feed', on: :collection
+      resources :likes, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
     end
   end
   

@@ -1,12 +1,12 @@
-.row
+.row{:id => "#{friend_request.id}"}
   .col.s12
     .card.medium
       .card-image
         = image_tag friend_request.friend_requestor.avatar_url, class: 'avetar activator'
-        %span.card-title=friend_requestor_name(friend_request)
+        %span.card-title=link_to friend_requestor_name(friend_request), friend_request.friend_requestor
       .card-content
         %p{:style => 'color: lightblue; font-style: oblique; font-size: 1rem;'}= friend_request.friend_requestor.email
         %p{:style => 'color: lightcoral; font-style: oblique; font-size: .9rem;'}= gender_english friend_request.friend_requestor
       .card-action
-        = link_to 'Confirm', user_friends_path(current_user, friender_id: friend_request.friend_requestor), method: :post
-        = link_to 'Delete request', friend_request_path(friend_request), method: :delete
+        = link_to 'Confirm', user_friends_path(current_user, friender_id: friend_request.friend_requestor), method: :post, remote: true, data: { confirm: "Click OK to accept #{friend_requestor_name friend_request}'s friend request." }
+        = link_to 'Delete request', friend_request_path(friend_request), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete #{friend_requestor_name friend_request}'s friend request?" }

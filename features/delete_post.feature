@@ -4,7 +4,7 @@ Feature: Delete posts
   I want to delete my post(s)
 
   Background:
-    Given a user "Pepe Bas" is logged in
+    Given user "Pepe Bas" is logged in
 
   Scenario: Delete own's post
     And user "Pepe Bas" has a post "Yay! I am on facebook!"

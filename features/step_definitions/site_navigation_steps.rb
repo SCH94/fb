@@ -10,6 +10,14 @@ Given(/^I click on "([^"]*)"$/) do |arg1|
   click_link arg1
 end
 
+Given(/^I click on "([^"]*)" on the navigation panel$/) do |arg1|
+  within '.nav-wrapper' do
+    within '.right' do
+      click_link arg1
+    end
+  end
+end
+
 When(/^I click on "([^"]*)" button$/) do |arg1|
   click_button arg1
 end

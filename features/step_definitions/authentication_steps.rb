@@ -27,7 +27,7 @@ Given(/^a user "([^"]*)" exists$/) do |arg1|
   # email and username are dynamically created in the factory.
 end
 
-Given(/^a user "([^"]*)" is logged in$/) do |arg1|
+Given(/^user "([^"]*)" is logged in$/) do |arg1|
   user = User.find_for_authentication(email: "#{arg1.split.first}.#{arg1.split.last}@example.com") || (step %{a user "#{arg1}" exists})
   login_as user, scope: :user
   # email and username are dynamically created in the factory.

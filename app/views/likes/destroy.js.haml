@@ -1,0 +1,3 @@
+$("##{@post.id} .like-form").html("#{j render 'like', post: @post}");
+$("##{@post.id} .likescount").html("#{pluralize(@post.likes.count, 'like')}")
+$("##{@post.id} .right.likethis").remove();

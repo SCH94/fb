@@ -1,6 +1,9 @@
-.card-panel.teal.small.hoverable
+.card-panel.teal.small.hoverable{:id=> "#{comment.id}"}
   .commenter
     = link_to "#{commenter(comment)}", comment.commenter, class: 'pink-text'
   .timeago
     = time_ago_in_words comment.created_at
-  %blockquote.white-text= simple_format comment.body
+  .commentbody
+    %blockquote= simple_format comment.body
+  = link_to 'delete', comment, method: :delete, data: { confirm: 'Delete comment?' }, class: 'deletecomment', remote: true if comment.commenter == current_user
+  .errorcomment

@@ -4,7 +4,7 @@ Feature: Home page
   I want to see the contents of the home page
 
   Background:
-    Given a user "Pepe Bas" is logged in
+    Given user "Pepe Bas" is logged in
 
     Scenario: View home page
       And user "Pepe Bas" does not have any friends

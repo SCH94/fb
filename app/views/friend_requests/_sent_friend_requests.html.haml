@@ -1,4 +1,4 @@
-.row
+.row{:id => "#{sent_friend_request.id}"}
   .col.s12
     .card.horizontal
       .card-image
@@ -6,4 +6,4 @@
       .card-stacked
         .card-content
           %p= link_to facebooker(sent_friend_request.requested_friend), sent_friend_request.requested_friend
-        .card-action= link_to 'Delete request', friend_request_path(sent_friend_request), method: :delete
+        .card-action= link_to 'Delete request', friend_request_path(sent_friend_request), method: :delete, remote: true, data: { confirm: "Are you sure you want to destroy your friend request to #{requested_friend_name sent_friend_request}?"}

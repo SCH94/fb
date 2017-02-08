@@ -12,11 +12,11 @@ class User < ApplicationRecord
   has_many :friend_invitations, class_name: 'FriendRequest', foreign_key: 'requested_friend_id', dependent: :destroy
   has_many :friend_requestors, through: :friend_invitations
 
-  has_many :friends, foreign_key: 'friender_id', dependent: :destroy
-  has_many :friendees, through: :friends
+  has_many :sought_friends, class_name: 'Friend', foreign_key: 'friender_id', dependent: :destroy
+  has_many :friendees, through: :sought_friends
 
-  has_many :friends, foreign_key: 'friendee_id', dependent: :destroy
-  has_many :frienders, through: :friends
+  has_many :accepted_friends, class_name: 'Friend', foreign_key: 'friendee_id', dependent: :destroy
+  has_many :frienders, through: :accepted_friends
 
 
   has_many :posts, dependent: :destroy

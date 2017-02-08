@@ -4,7 +4,7 @@ Feature: Posts
   I want to see the post text box
 
   Background:
-    Given a user "Pepe Bas" is logged in
+    Given user "Pepe Bas" is logged in
 
   Scenario: Post text box locations
     When I go to the home page

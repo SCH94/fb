@@ -4,10 +4,10 @@ Feature: Delete posts using AJAX
   I want to delete a post without refreshing the page
 
   Background:
-    Given a user "Pepe Bas" is logged in
+    Given user "Pepe Bas" is logged in
     Given user "Pepe Bas" has a post "Yay! I am on facebook!"
 
-  @javascript
+  # @javascript
   Scenario: Delete a post using AJAX
     When I go to "Pepe Bas"'s profile page
     And click on "Delete" on post "Yay! I am on facebook!"

@@ -1,0 +1,2 @@
+= link_to 'Like', post_likes_path(post), method: :post, remote: true
+.likescount= pluralize(post.likes.count, 'like')

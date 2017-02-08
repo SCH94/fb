@@ -47,8 +47,10 @@
       .file-path-wrapper
         %input{ :type => "text", :class => "file-path validate" }/
     %br
-    .actions.right
+    .actions.right-align
       = f.button "Create Account", class: 'btn waves-effect waves-light indigo lighten-2'
+      = link_to 'Log in', new_user_session_path, class: 'btn waves-effect waves-light'
     %br/
-    = link_to 'Back to log in', new_user_session_path, class: 'left'
-
+    %br/
+    %br/
+    %br/

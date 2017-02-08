@@ -1,26 +1,34 @@
 .container
   .section
     .row
-      .col.s12.center
+      .col.s12.center-align
         .profilepic
           .piccontainer
-            = image_tag @user.avatar_url(:profile), class: 'profile picture'
-        %h4= facebooker(@user)
-        %p= link_to 'Friends', user_friends_path(@user)
-        - if fb_friend? @user
-          .fb-friend You are friends with this person
-        - else
-          - unless facebooker_current_user? @user
-            - unless request_sent? @user
-              = button_to 'Add friend', user_friend_requests_path(current_user, requested_friend_id: @user ), class: 'btn waves-effect waves-light'
+            = image_tag @user.avatar_url(:profile), class: 'profile-picture'
+          %h4= facebooker(@user)
+          - if user_signed_in?
+            - if fb_friend? @user
+              .fb-friend You are friends with this person
             - else
-              %span{:style => 'color: lightcoral; font-style: oblique; font-size: 1.5rem;'} Friend request sent.
+              - unless facebooker_current_user? @user
+                - if request_sent? @user # OPTIMIZE refactor to switch statement if better
+                  %span{:style => 'color: lightcoral; font-style: oblique; font-size: 1rem;'} Friend Request Sent
+                - elsif requested_by? @user
+                  .friend-request-action
+                    sent you a friend request
+                    %br/
+                    %br/
+                    = link_to 'Confirm', user_friends_path(current_user, friender_id: @friend_request_to_current_user.friend_requestor), method: :post, remote: true, data: { confirm: "Click OK to accept #{friend_requestor_name @friend_request_to_current_user}'s friend request." }, class: 'btn waves-effect waves-light indigo'
+                    = link_to 'Delete request', friend_request_path(@friend_request_to_current_user), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete #{friend_requestor_name @friend_request_to_current_user}'s friend request?" }, class: 'btn waves-effect waves-light'
+                - else
+                  = button_to 'Add friend', user_friend_requests_path(current_user, requested_friend_id: @user ), class: 'btn waves-effect waves-light'
+        .friends-link= link_to 'Friends', user_friends_path(@user)
     - if facebooker_current_user? @user
       .row
         .col.s12
           .profile-postsbox
             .postsbox
-              = form_for @post, url: user_posts_path(current_user) do |f|
+              = form_for @post, url: user_posts_path(current_user), remote: true do |f| # FIXME not working
                 .input-field
                   = f.label :content, 'Post your status'
                   = f.text_area :content, class: 'materialize-textarea'
@@ -29,5 +37,5 @@
                     Post
                     %i.material-icons.right mode_edit
     .section
-      .profile-posts
+      .facebook-posts
         = render @posts

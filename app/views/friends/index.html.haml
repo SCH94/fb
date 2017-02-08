@@ -1,7 +1,7 @@
 .container
-  %h4.center-align Friends
   - if facebooker_current_user? @user
-    = link_to 'Friend requests', user_friend_requests_path(current_user), class: 'right'
+    .friend-requests-link= link_to 'View Friend Requests', user_friend_requests_path(current_user)
+  %h4.center-align Friends
   .section
     .facebookers
       - @friends.in_groups_of(3, false) do |group|

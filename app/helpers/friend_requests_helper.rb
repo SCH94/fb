@@ -14,4 +14,8 @@ module FriendRequestsHelper
   def request_sent?(user)
     current_user.requested_friends.include? user
   end
+
+  def requested_by?(user)
+    current_user.friend_requestors.include? user
+  end
 end

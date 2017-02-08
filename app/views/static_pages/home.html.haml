@@ -5,9 +5,10 @@
         Good day!
   .row
     .col.s12
+      .error-messages.center-align
       .home-postsbox.center
         .postsbox
-          = form_for @post, url: user_posts_path(current_user) do |f|
+          = form_for @post, url: user_posts_path(current_user), remote: true do |f|
             .input-field
               = f.label :content, "How's your day?"
               = f.text_area :content, size: '50x5', class: 'materialize-textarea'
@@ -17,5 +18,5 @@
                 Post
                 %i.material-icons.right mode_edit
   .section
-    .home-posts
+    .facebook-posts
       = render @posts

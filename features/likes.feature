@@ -4,7 +4,7 @@ Feature: Likes
   I want to like posts
 
   Background:
-    Given a user "Pepe Bas" is logged in
+    Given user "Pepe Bas" is logged in
     And user "Loren Burgos" has a post "Yay! I'm on leave!"
 
     Scenario: Like a post

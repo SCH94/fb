@@ -1,10 +1,10 @@
 - if user_signed_in?
   %h4.left-align Add friends
 - else
-  %h4.center-align Join us on Facebook!
+  %h4.center-align= link_to 'Join us on Facebook', new_user_session_path
 .section
   .container.facebookers
     - @users.in_groups_of(3, false) do |group|
       .row
         - group.each do |user|
-          = render partial: 'users/user', locals: { user: user }
+          = render 'user', user: user

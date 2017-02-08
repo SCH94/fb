@@ -1,0 +1,8 @@
+- if @comment.errors.any?
+  $("##{@post.id} .comment-error-messages").html("You can't have a blank comment.");
+  $(".error-messages").empty();
+- else
+  $("##{@post.id} .posted-comments").append("#{j render 'comment', comment: @comment}");
+  $("##{@post.id} #comment_body").val("");
+  $(".comment-error-messages").empty();
+  $(".error-messages").empty();

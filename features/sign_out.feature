@@ -4,7 +4,7 @@ Feature: Sign out
   I want to log out
 
   Background:
-    Given a user "Pepe Bas" is logged in
+    Given user "Pepe Bas" is logged in
 
   Scenario: Log out
 		And I am on the profile page

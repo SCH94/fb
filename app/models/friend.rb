@@ -8,6 +8,10 @@ class Friend < ApplicationRecord
   private
 
     def duplicate
-      return errors.add :base, message: 'Friend already exists.' if self.new_record? && Friend.where(friender_id: self.friender_id, friendee_id: self.friendee_id).first
+      return errors.add :base, message: 'Friend already exists.' if self.new_record? && friend_relationship_duplicate
+    end
+
+    def friend_relationship_duplicate
+      Friend.where(friender_id: self.friender_id, friendee_id: self.friendee_id).first || Friend.where(friender_id: self.friendee_id, friendee_id: self.friender_id).first
     end
 end

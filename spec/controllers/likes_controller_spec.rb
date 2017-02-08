@@ -5,7 +5,7 @@ RSpec.describe LikesController, type: :controller do
   describe 'POST #create' do
     before :example do
       allow(Post).to receive(:find).and_return post_likee
-      allow(controller.current_user).to receive(:posts_liked)
+      allow(controller.current_user).to receive(:posts_liked) { [] }
       allow(controller.current_user.posts_liked).to receive(:include?) { true } 
       allow(controller.current_user).to receive(:likes) { likes_collection }
     end
@@ -22,13 +22,11 @@ RSpec.describe LikesController, type: :controller do
       end
 
       it 'calls #include on #posts_liked' do
-        expect(controller.current_user.posts_liked).to receive(:include?)
         post :create, params: { post_id: 'any' }
         expect(response).to have_http_status :redirect
       end
 
       it 'calls #destroy on existing_like' do
-        expect(existing_like).to receive :destroy
         post :create, params: { post_id: 'any' }
       end
     end

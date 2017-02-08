@@ -18,8 +18,8 @@ $primary-color: color("indigo", "base") !default;
 $secondary-color: color("pink", "base") !default;
 @import 'materialize';
 
-.brand-logo {
-  margin-left: 10px;
+.brand {
+  font-size: 2rem;
 }
 
 .alert {
@@ -31,4 +31,19 @@ $secondary-color: color("pink", "base") !default;
   color: green;
   font-weight: bold;
   text-shadow: 1px 1px 3px cyan;
+}
+
+.friend_requests_notification {
+  // @extend .right;
+  // margin-right: 160px;
+  display: inline-block;
+}
+
+.fr-notification-link {
+  @extend .red-text, .text-lighten-1;
+}
+
+.nav-wrapper {
+  // display: flex;
+  // justify-content: space-around;
 }

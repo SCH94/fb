@@ -4,15 +4,15 @@ Feature: Friend Request
   I want to add friends
 
   Background:
-    Given a user "Pepe Bas" is logged in
+    Given user "Pepe Bas" is logged in
     And a user "Loren Burgos" exists
 
   Scenario: Add a friend
     And I go to "Loren Burgos"'s profile page
     Then I should see "Loren Burgos"
     When I click on "Add friend" button
-    And I should see "Friend request sent"
-    Then I should still be on "Loren Burgos"'s profile page
+    Then I should see "Friend request sent"
+    And I should still be on "Loren Burgos"'s profile page
 
   Scenario: No Add friend button on self's profile page
     And I go to "Pepe Bas"'s profile page

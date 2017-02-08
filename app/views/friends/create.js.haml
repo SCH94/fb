@@ -1,0 +1,3 @@
+$("##{@friend_request.id}").remove();
+$(".friend-requests > .headline").html("Respond to your #{pluralize(@friend_invitations.count, 'Friend Request')}");
+$(".friend_requests_notification").html("#{j render 'friend_requests/friend_requests_notification'}");

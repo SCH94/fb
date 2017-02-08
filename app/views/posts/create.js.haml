@@ -1,0 +1,6 @@
+- if @post.errors.any?
+  $(".error-messages").html("Seems like you have forgotten how your day is doing.")
+- else
+  $(".facebook-posts").prepend("#{j render 'post', post: @post}");
+  $("#post_content").val("");
+  $(".error-messages").empty();

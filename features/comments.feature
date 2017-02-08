@@ -5,7 +5,7 @@ Feature: Comments
 
   Background:
     Given a user Pepe Bas has a post
-    And a user "Loren Burgos" is logged in
+    And user "Loren Burgos" is logged in
     And "Pepe Bas" is friends with "Loren Burgos"
 
     Scenario: Comment on a post

@@ -14,6 +14,8 @@ RSpec.describe Post, type: :model do
 
       it 'is not a valid post' do
         post.content = nil
+        post.valid?
+        expect(post.errors[:content]).to include( "can't be blank")
         expect(post).not_to be_valid
       end
 
