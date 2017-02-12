@@ -1,6 +1,6 @@
 .container
   .row
-    .col.s6.friend-requests
+    .col.s6.friend-requests{:id => "fis#{current_user.to_param}"}
       %h5.headline Respond to your #{pluralize(@friend_invitations.count, 'Friend Request')}
       = render @friend_invitations
     .col.s6.sent-friend-requests

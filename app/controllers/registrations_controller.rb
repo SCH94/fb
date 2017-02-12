@@ -3,7 +3,8 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super
     if resource.persisted?
-      UserMailer.welcome_email(resource).deliver_now
+      UserMailer.welcome_email(resource).deliver_later
+      UserMailer.new_signup(resource).deliver_later
     end
   end
 

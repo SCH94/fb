@@ -1,0 +1,13 @@
+/* User show page */
+$(".status-with-action#u#{@friend_requestor.to_param}").empty();
+$(".status-with-action#u#{@friend_requestor.to_param}").html("#{j render 'users/user_add_friend', user: @friend_requestor}");
+
+/* Header notification badge and dropdown */
+$("#notification-dropdown > ##{@friend_request.to_param}").remove();
+$(".notification-friend-invitations#nfi#{@requested_friend.to_param} li").html("#{j render 'notification_friend_invitations', user: @requested_friend}"); 
+
+/* Friend requests index */
+/ Headline
+$(".friend-requests#fis#{@requested_friend.to_param} > .headline").html("Respond to your #{pluralize(@requested_friend.friend_invitations.count, 'Friend Request')}");
+/ Friend invitation item
+$(".friend-request#fi#{@friend_request.to_param}").remove();

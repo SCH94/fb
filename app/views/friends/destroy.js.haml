@@ -1,5 +1,5 @@
+/* User show page */
 $(".status-with-action#u#{@friend.to_param}").html("#{j render 'users/user_add_friend', user: @friend}");
+/* Users index page */
 $("#u#{@friend.id} > .card-reveal > .section").remove();
 $("#u#{@friend.id} > .facebooker").append("<p class='friendstatus'><a href='/users/#{current_user.to_param}/friend_requests?requested_friend_id=#{@friend.to_param}' data-method='post' data-remote='true'>Add friend</a>");
-
-

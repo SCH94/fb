@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_cable_url = "wss://efbook.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = ['https://efbook.herokuapp.com', 'http://efbook.herokuapp.com']
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

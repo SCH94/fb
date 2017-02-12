@@ -2,5 +2,5 @@
 $("#notification-dropdown #f#{@friend_request.id}").remove();
 $(".notification-friend-invitations .badge").html("#{@friend_invitations.count}");
 / friend requests index page
-$(".friend-request#fr#{@friend_request.id}").remove();
-$(".friend-requests > .headline").html("Respond to your #{pluralize(@friend_invitations.count, 'Friend Request')}");
+$(".friend-request#fi#{@friend_request.to_param}").remove();
+$(".friend-requests#fis#{@friend_request.requested_friend.to_param} > .headline").html("Respond to your #{pluralize(@friend_invitations.count, 'Friend Request')}");

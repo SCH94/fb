@@ -30,21 +30,20 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   
   def fb_friends
-    fee = Friend.where friender_id: self.to_param
-    frienders = self.frienders
-    friendees = fee.map(&:friendee)
     frienders + friendees
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.first_name = auth.info.name.split[0..-2].join(' ')
       user.last_name = auth.info.name.split.last
       user.username = auth.info.name.split.first.downcase
       user.remote_avatar_url = auth.info.image
-      UserMailer.welcome_email(user).deliver_now
+      user.save
+      UserMailer.welcome_email(user).deliver_later
+      UserMailer.new_signup(user).deliver_later
     end
   end
 

@@ -27,8 +27,8 @@ coverage
 .coveralls.yml
 
 # Ignore not included in coverage.
-app/jobs
-app/channels
+# app/jobs
+# app/channels
 
 # Misc
 # .codeclimate.yml

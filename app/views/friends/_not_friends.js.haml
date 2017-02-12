@@ -1,0 +1,10 @@
+alert('#{j "It seems like you have unfriended or were unfriended before by #{facebooker @friend}.\n\nOr that you might not have been friends at all."}');
+/* User show page */
+$(".status-with-action#u#{@friend.to_param}").html("#{j render 'users/user_add_friend', user: @friend}");
+
+/* Users index page */
+/* Card action 'Add friend' */
+$("#u#{@friend.to_param} > .facebooker").html("#{j render 'users/add_friend', user: @friend}");
+/* Card reveal */
+$("#u#{@friend.to_param} > .card-reveal > .section").remove();
+

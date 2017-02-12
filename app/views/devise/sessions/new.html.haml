@@ -27,11 +27,15 @@
                 %span.lever
                 On
     %br/
-    .actions.loginbutton
-      = f.button class: 'btn waves-effect waves-light' do
+    .actions.login
+      = f.button class: 'btn waves-effect waves-light loginbutton' do
         Log in
         %i.material-icons.right send
-      .fblogin= link_to 'or Log in with Facebook', user_facebook_omniauth_authorize_path, class: 'btn waves-effect waves-light indigo'
+      %p.signup-via
+        %strong or signup via
+      .fblogin
+        = link_to user_facebook_omniauth_authorize_path do
+          = image_tag 'fb.png', alt: 'facebook login', class: 'fbicon'
       %br/
       %br/
   .sessionlinks
