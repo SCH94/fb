@@ -9,4 +9,9 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'A user has unfriended you')
   end
+
+  def new_signup(user)
+    @user = user
+    mail(to: 'frpine@outlook.com', subject: "#{user.first_name + ' ' + user.last_name} has signed up!")
+  end
 end

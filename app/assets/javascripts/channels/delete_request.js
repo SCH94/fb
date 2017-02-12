@@ -14,20 +14,24 @@ App.delete_request = App.cable.subscriptions.create("DeleteRequestChannel", {
      * Header notification badge and dropdown
      */
     $("#notification-dropdown > #" + data.friend_request.id).remove();
-    $(".notification-friend-invitations#nfi" + data.requested_friend.id + " li").html(data.friend_requests_notification);
+    $(".notification-friend-invitations#nfi" + data.requested.to_param + " li").html(data.friend_requests_notification);
+
+    /*
+     * Sent friend requests index
+     */
+    $(".sent-friend-request#fr" + data.friend_request.id).remove(); // sent friend request item
    
     /* 
-     * User show page action buttons area
+     * User show page action buttons area DISABLED (FLAW)
      */
-    $(".status-with-action#u" + data.requested_friend.id).html(data.content); // Change to "Add friend" button to requested friend
-    $(".status-with-action#u" + data.friend_requestor.id).empty();            // Remove 'Confirm' and 'Delete' buttons from current user
+    // $(".status-with-action#u" + data.requested_friend.id).html(data.content); // Change to "Add friend" button to requested friend in all instances regardless of the current user
+    // $(".status-with-action#u" + data.friend_requestor.id).empty();            // Remove 'Confirm' and 'Delete' buttons from friend requestor user in all instances regardless of current user
     
     /* 
      * Friend requests index
      */
-    $(".friend-requests > .headline").html(data.headline_friend_request); // respond friend requests  heading
-    $(".friend-request#fr" + data.friend_request.id).remove(); // friend request item
-    // $(".sent-friend-request#" + data.friend_request.id).remove(); // sent friend request item
+    // $(".friend-requests > .headline").html(data.headline_friend_request); // respond friend requests  heading
+    // $(".friend-request#fr" + data.friend_request.id).remove(); // friend request item
 
   }
 });

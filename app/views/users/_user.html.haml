@@ -10,7 +10,7 @@
         - unless facebooker_current_user? user
           - unless fb_friend? user
             - unless request_sent?(user) || requested_by?(user)
-              %p.friendstatus= link_to 'Add friend', user_friend_requests_path(current_user, requested_friend_id: user), method: :post, remote: true
+              = render 'add_friend', user: user
     .card-reveal
       %span.card-title.grey-text.text-darken-4
         = link_to facebooker(user), user

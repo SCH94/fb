@@ -7,4 +7,8 @@ class UserMailerPreview < ActionMailer::Preview
   def unfriend
     UserMailer.unfriend(User.second, User.first)
   end
+
+  def new_signup
+    UserMailer.new_signup(User.first)
+  end
 end

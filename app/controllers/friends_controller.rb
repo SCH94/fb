@@ -53,7 +53,7 @@ class FriendsController < ApplicationController
         format.html { redirect_back fallback_location: root_path, notice: "You are not friends with #{helpers.facebooker(@friend)} anymore." }
       end
     else
-      render 'user_does_not_exist'
+      render js: "alert('This user does not exist anymore.');"
     end
   end
 
@@ -64,7 +64,7 @@ class FriendsController < ApplicationController
     end
 
     def not_friends
-      render js: "alert('#{helpers.j "It seems like you have unfriended or were unfriended already by #{helpers.facebooker @friend}.\nOr that you might not have been friends at all.\nPlease contact the administrator."}');"
+     render '_not_friends' 
     end
 
 end

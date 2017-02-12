@@ -1,3 +1,5 @@
-/$("##{@user.id} .friendstatus").css({"color": "lightcoral", "font-style": "oblique", "font-size": ".9rem"}).html("Added friend");
-/moved to assets/Javascripts/channels/notification.js as this is being broadcasted and not being passed to render anymore in format.js
+/* Users index page */
+$("#u#{@requested_friend.to_param} .friendstatus").css({"color": "lightcoral", "font-style": "oblique", "font-size": ".9rem"}).html("Added friend");
 
+/* Users show page */
+$(".status-with-action#u#{@requested_friend.to_param}").html("<span style='color: lightcoral; font-style: oblique; font-size: 1rem;'>Friend Request Sent</span>");
