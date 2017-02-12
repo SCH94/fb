@@ -1,3 +1,3 @@
-$("##{@post.id} .like-form").html("#{j render 'unlike', post: @post}");
-$("##{@post.id} .likescount").html("#{pluralize(@post.likes.count, 'like')}")
-$("##{@post.id} .card-action").append("<div class='right likethis'><i class='small material-icons left'>thumb_up</i>You like this</div>");
+$("#p#{@post.id} .like-form").html("#{j render 'unlike', post: @post}");
+$("#p#{@post.id} .likescount").html("#{pluralize(@post.likes.count, 'like')}")
+$("#p#{@post.id} .card-action").append("<div class='right likethis'><i class='small material-icons left'>thumb_up</i>You like this</div>");

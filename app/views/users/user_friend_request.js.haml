@@ -1,3 +1,8 @@
-$(".friend-request-action").remove();
-$(".friend_requests_notification").html("#{j render 'friend_requests/friend_requests_notification'}");
-$("<div></div>").addClass("fb-friend").html("You are friends with this person").appendTo(".profilepic");
+$(".status-with-action").empty();
+$("<div></div>").addClass("fb-friend").html("You are now friends with this person").appendTo(".profilepic");
+/ notification friend invitations
+$("#notification-dropdown #{@friend_request.id}").remove();
+$(".notification-friend-invitations .badge").html("#{@friend_invitations.count}");
+/ friend requests index page
+$(".friend-request#fr#{@friend_request.id}").remove();
+$(".friend-requests > .headline").html("Respond to your #{pluralize(@friend_invitations.count, 'Friend Request')}");

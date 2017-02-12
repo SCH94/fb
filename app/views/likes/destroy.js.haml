@@ -1,3 +1,3 @@
-$("##{@post.id} .like-form").html("#{j render 'like', post: @post}");
-$("##{@post.id} .likescount").html("#{pluralize(@post.likes.count, 'like')}")
-$("##{@post.id} .right.likethis").remove();
+$("#p#{@post.id} .like-form").html("#{j render 'like', post: @post}");
+$("#p#{@post.id} .likescount").html("#{pluralize(@post.likes.count, 'like')}")
+$("#p#{@post.id} .right.likethis").remove();

@@ -1,5 +1,5 @@
 .col.s4
-  .card
+  .card{:id => "u#{friend.id}"}
     .card-image.waves-effect.waves-light.waves-block
       = image_tag friend.avatar_url, class: 'activator', alt: 'profile picture'
     .card-content

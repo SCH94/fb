@@ -1,0 +1,3 @@
+= link_to user_friend_requests_path(user), class: 'dropdown-button', data: { activates: 'notification-dropdown' } do
+  = omit_number_after_pluralize(user.friend_invitations.count, 'Friend Request')
+  %span.new.badge= user.friend_invitations.count

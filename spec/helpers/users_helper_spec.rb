@@ -51,4 +51,24 @@ RSpec.describe UsersHelper, type: :helper do
     end
   end
 
+  describe 'pluralizes a string and omits the number portion' do
+    let(:string) { 'Friend Request' }
+    let(:plural_string) { 'Friend Requests' }
+    let(:single_count) { 1 }
+    let(:plural_count) { 10 }
+    let(:zero_count) { 0 }
+
+    it 'is singular if count is 1' do
+      expect(helper.omit_number_after_pluralize(single_count, string)).to eq string
+    end
+
+    it 'is plural if count is more than 1' do
+      expect(helper.omit_number_after_pluralize(plural_count, string)).to eq plural_string
+    end
+
+    it 'is plural if count is zero' do
+      expect(helper.omit_number_after_pluralize(zero_count, string)).to eq plural_string
+    end
+  end
+
 end

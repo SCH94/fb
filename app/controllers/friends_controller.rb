@@ -1,4 +1,5 @@
 class FriendsController < ApplicationController
+  rescue_from StandardError, with: :not_friends
 
   def index
     @user = User.find(params[:user_id])
@@ -17,9 +18,9 @@ class FriendsController < ApplicationController
           @friend_request.destroy
           render 'users/user_friend_request' if request.referrer == user_url(friend_relationship_params[:friender_id])
         else
-          @friend_request.destroy
-          render 'users/destroy_friend_request' and return if request.referrer == user_url(friend_relationship_params[:friender_id])
-          render 'friend_requests/destroy_friend_is_duplicate'
+          render js: "alert('You are already friends with #{helpers.friender_name @friend_relationship}.');"
+          # render 'users/destroy_friend_request' and return if request.referrer == user_url(friend_relationship_params[:friender_id])
+          # render 'friend_requests/destroy_friend_is_duplicate'
         end
       end
 
@@ -35,9 +36,35 @@ class FriendsController < ApplicationController
     end
   end
 
+  def destroy
+    if @friend = User.find(params[:friend_id])
+      if current_user.frienders.include? @friend
+        current_user.frienders.delete @friend
+      elsif current_user.friendees.include? @friend
+        current_user.friendees.delete @friend
+      else
+        raise StandardError
+      end
+
+      UserMailer.unfriend(current_user, @friend).deliver_later
+
+      respond_to do |format|
+        format.js
+        format.html { redirect_back fallback_location: root_path, notice: "You are not friends with #{helpers.facebooker(@friend)} anymore." }
+      end
+    else
+      render 'user_does_not_exist'
+    end
+  end
+
   private
 
     def friend_relationship_params
       params.permit(:friender_id)
     end
+
+    def not_friends
+      render js: "alert('#{helpers.j "It seems like you have unfriended or were unfriended already by #{helpers.facebooker @friend}.\nOr that you might not have been friends at all.\nPlease contact the administrator."}');"
+    end
+
 end

@@ -45,8 +45,8 @@ RSpec.describe FriendsController, type: :controller do
         create :friend_request
         sign_in(@user = User.find_by_email('loren.burgos@example.com'))
         create :friend, friender: friender, friendee: @user
-        allow(controller.current_user).to receive(:friends)
-        allow(controller.current_user.friends).to receive(:build).and_return(friend_relationship)
+        allow(controller.current_user).to receive(:accepted_friends)
+        allow(controller.current_user.accepted_friends).to receive(:build).and_return(friend_relationship)
         allow(FriendRequest).to receive(:where).and_return(friend_request)
         allow(FriendRequest.where.first).to receive(:destroy)
       end
@@ -60,22 +60,21 @@ RSpec.describe FriendsController, type: :controller do
         expect(response).to have_http_status :redirect
         expect(flash).not_to be_empty
       end
+    end
 
-      context 'makes friend available to the views' do
+    context 'makes friend available to the views' do
 
-        let(:friender) { User.find_by_email('loren.burgos@example.com') }
+      let(:friender) { User.find_by_email('loren.burgos@example.com') }
 
-        it 'calls #friends on current user' do
-          expect(controller.current_user).to receive(:friends)
-          post :create, params: { user_id: friender.to_param }
-        end
-
-        it 'calls #build on current_user.friends' do
-          expect(controller.current_user.friends).to receive(:build)
-          post :create, params: { user_id: friender.to_param }
-        end
+      it 'calls #friends on current user' do
+        expect(controller.current_user).to receive(:accepted_friends)
+        post :create, params: { user_id: friender.to_param }
       end
 
+      it 'calls #build on current_user.friends' do
+        expect(controller.current_user.accepted_friends).to receive(:build)
+        post :create, params: { user_id: friender.to_param }
+      end
     end
 
     context 'friend already requested' do
@@ -87,6 +86,30 @@ RSpec.describe FriendsController, type: :controller do
         expect(response).to have_http_status 200
       end
     end
+  end
 
+  describe 'DELETE #destroy', type: :request do
+    before :example do
+      sign_in friendee
+    end
+
+    let(:friendee) { create :user, first_name: 'Loren', last_name: 'Burgos' }
+    let(:friender) { create :user, first_name: 'Pepe', last_name: 'Bas' }
+    let!(:friend_relationship) { create :friend, friendee: friendee, friender: friender } # for the observation matcher to work properly in observation matching example.
+
+
+    it 'raises error when deleted friend relationship is fetched' do
+      delete "/friends/#{friend_relationship.to_param}", params: { friend_id: friender.to_param, format: :js }
+      expect{Friend.find(friend_relationship.to_param)}.to raise_exception(ActiveRecord::RecordNotFound).with_message("Couldn't find Friend with 'id'=#{friend_relationship.to_param}")
+    end
+
+    it 'reduces count of friend relationship by -1' do
+     expect{ delete "/friends/#{friend_relationship.to_param}", params: { friend_id: friender.to_param, format: :js } }.to change(Friend, :count).by(-1)
+    end
+
+    it 'returns 200' do
+      delete "/friends/#{friend_relationship.to_param}", params: { friend_id: friender.to_param, format: :js }
+      expect(response.status).to eq 200
+    end
   end
 end

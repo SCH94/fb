@@ -1,5 +1,5 @@
 .col.s4
-  .card{:id => "#{user.id}"}
+  .card{:id => "u#{user.id}"}
     .card-image.waves-effect.waves-light.waves-block
       = image_tag user.avatar_url, class: 'avetar activator'
     .card-content.facebooker
@@ -27,3 +27,4 @@
                 %p{:style => 'color: lightcoral; font-style: oblique; font-size: 1.2rem;'} You have a friend request from this user.
             - else
               %p{:style => 'color: purple; font-style: oblique; font-size: 1.2rem;'} You are friends with this person
+              = link_to 'Unfriend', friend_path(current_user, friend_id: user.id), method: :delete, data: { confirm: "Are you sure you want to unfriend #{facebooker user}?" }, remote: true, class: 'btn waves-effect waves-light'

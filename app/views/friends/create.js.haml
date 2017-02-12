@@ -1,3 +1,6 @@
-$("##{@friend_request.id}").remove();
+/ notification friend invitations
+$("#notification-dropdown #f#{@friend_request.id}").remove();
+$(".notification-friend-invitations .badge").html("#{@friend_invitations.count}");
+/ friend requests index page
+$(".friend-request#fr#{@friend_request.id}").remove();
 $(".friend-requests > .headline").html("Respond to your #{pluralize(@friend_invitations.count, 'Friend Request')}");
-$(".friend_requests_notification").html("#{j render 'friend_requests/friend_requests_notification'}");

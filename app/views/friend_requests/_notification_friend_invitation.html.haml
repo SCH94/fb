@@ -1,0 +1,5 @@
+%li{:id => "#{friend_invitation.id}"}
+  = link_to friend_invitation.friend_requestor, class: 'notification-friend-requestor-link' do
+    .chip
+      = image_tag friend_invitation.friend_requestor.avatar_url, class: 'responsive-img circle'
+      = friend_requestor_name(friend_invitation)

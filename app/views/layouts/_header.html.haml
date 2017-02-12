@@ -1,4 +1,8 @@
 %header
+  - if user_signed_in?
+    %ul{:id => "notification-dropdown", :class => "dropdown-content"}
+      - current_user.friend_invitations.each do |friend_invitation|
+        = render 'friend_requests/notification_friend_invitation', friend_invitation: friend_invitation
   %nav
     .nav-wrapper
       .container
@@ -6,11 +10,17 @@
           %i.material-icons menu
         - if user_signed_in?
           - if current_user.friend_invitations.any?
-            .friend_requests_notification
-              = render 'friend_requests/friend_requests_notification'
+            .notification-friend-invitations{:id => "nfi#{current_user.id}"}
+              %ul
+                %li
+                  = render 'friend_requests/notification_friend_invitations',  user: current_user
+          - else
+            .notification-friend-invitations{:id => "nfi#{current_user.id}", :style => "display: none;"}
+              %ul
+                %li
         - else
           = link_to 'Facebook', root_path, class: 'brand'
-        %ul.right.hide-on-med-and-down#nav-mobile
+        %ul.right#nav-mobile
           %li
             = link_to 'Facebookers', users_path
           - if user_signed_in?

@@ -5,6 +5,8 @@ class Friend < ApplicationRecord
   validates_presence_of :friender_id, :friendee_id
   validate :duplicate
 
+  delegate :first_name, :last_name, to: :friender, prefix: true
+
   private
 
     def duplicate

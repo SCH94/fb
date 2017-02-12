@@ -1,31 +1,38 @@
 .new-session
   %h2.center-align Log in
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    .input-field
-      %i.material-icons.prefix email
-      = f.label :email
-      = f.email_field :email, autofocus: true
-    .input-field
-      %i.material-icons.prefix vpn_key
-      = f.label :password
-      = f.password_field :password, autocomplete: "off"
+    .row
+      .col.s12
+        .input-field
+          %i.material-icons.prefix email
+          = f.label :email
+          = f.email_field :email, autofocus: true
+    .row
+      .col.s12
+        .input-field
+          %i.material-icons.prefix vpn_key
+          = f.label :password
+          = f.password_field :password, autocomplete: "off"
     - if devise_mapping.rememberable?
       -# .input-field
-      .switch
-        -# %i.material-icons.prefix
-        = f.label :remember_me do
-          Remember me
-          .switch-remember
-            Off
-            = f.check_box :remember_me
-            %span.lever
-            On
+      .row
+        .col.s12
+          .switch
+            -# %i.material-icons.prefix
+            = f.label :remember_me do
+              Remember me
+              .switch-remember.right
+                Off
+                = f.check_box :remember_me
+                %span.lever
+                On
     %br/
     .actions.loginbutton
       = f.button class: 'btn waves-effect waves-light' do
         Log in
         %i.material-icons.right send
       .fblogin= link_to 'or Log in with Facebook', user_facebook_omniauth_authorize_path, class: 'btn waves-effect waves-light indigo'
-    %br/
+      %br/
+      %br/
   .sessionlinks
     = render "devise/shared/links"

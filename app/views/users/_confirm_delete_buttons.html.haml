@@ -1,0 +1,5 @@
+sent you a friend request
+%br/
+%br/
+= link_to 'Confirm', user_friends_path(current_user, friender_id: friend_request.friend_requestor), method: :post, remote: true, data: { confirm: "Click OK to accept #{friend_requestor_name friend_request}'s friend request." }, class: 'btn waves-effect waves-light indigo'
+= link_to 'Delete request', friend_request_path(friend_request), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete #{friend_requestor_name friend_request}'s friend request?" }, class: 'btn waves-effect waves-light'

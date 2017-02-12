@@ -1,0 +1,8 @@
+Hi #{@user.first_name + ' ' + @user.last_name},
+
+%p
+  = link_to (@current_user.first_name + " " + @current_user.last_name), user_url(@current_user)
+  has unfriended you.
+%p
+  Cheers,<br/>
+  Efbook team

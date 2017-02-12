@@ -47,3 +47,8 @@ $secondary-color: color("pink", "base") !default;
   // display: flex;
   // justify-content: space-around;
 }
+
+.notification-friend-invitations {
+  display: inline-block;
+  width: 200px;
+}

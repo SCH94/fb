@@ -20,4 +20,9 @@ module UsersHelper
   def facebooker(user)
     user.first_name + ' ' + user.last_name
   end
+
+  def omit_number_after_pluralize(count, string)
+    string_array = pluralize(count, string).split
+    string_array[1..2].join(' ')
+  end
 end
