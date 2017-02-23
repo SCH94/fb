@@ -13,9 +13,9 @@ App.delete_request = App.cable.subscriptions.create("DeleteRequestChannel", {
     /*
      * Header notification badge and dropdown
      */
-    $("#notification-dropdown > #" + data.friend_request.id).remove();
-    $(".notification-friend-invitations#nfi" + data.requested.to_param + " li").html(data.friend_requests_notification);
-
+    $("#notification-dropdown" + data.requested_friend.id + " > #" + data.friend_request.id).remove();
+    $(".notification-friend-invitations#nfi" + data.requested_friend.id + " li").html(data.friend_requests_notification);
+    //
     /*
      * Sent friend requests index
      */
@@ -30,8 +30,8 @@ App.delete_request = App.cable.subscriptions.create("DeleteRequestChannel", {
     /* 
      * Friend requests index
      */
-    // $(".friend-requests > .headline").html(data.headline_friend_request); // respond friend requests  heading
-    // $(".friend-request#fr" + data.friend_request.id).remove(); // friend request item
+    $(".friend-requests#fis" + data.requested_friend.id + " > .headline").html(data.headline_friend_invitations); // respond friend requests  heading
+    $(".friend-request#fi" + data.friend_request.id).remove(); // friend request item
 
   }
 });

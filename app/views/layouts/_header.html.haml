@@ -1,6 +1,6 @@
 %header
   - if user_signed_in?
-    %ul{:id => "notification-dropdown", :class => "dropdown-content"}
+    %ul{:id => "notification-dropdown#{current_user.id}", :class => "dropdown-content"}
       - current_user.friend_invitations.each do |friend_invitation|
         = render 'friend_requests/notification_friend_invitation', friend_invitation: friend_invitation
   %nav

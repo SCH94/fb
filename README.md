@@ -1,6 +1,7 @@
 fb rails app
 
-access pre-made users using login format `firstname.lastname@example.com`, password is **foobar**.
+* access pre-made users using login format `firstname.lastname@example.com`, password is **foobar**.
+* `efbook.herokuapp.com/users/feed` for the sample feed
 
 [![Build Status](https://travis-ci.org/sic-f/fb.svg?branch=master)](https://travis-ci.org/sic-f/fb)
 [![Coverage Status](https://coveralls.io/repos/github/sic-f/fb/badge.svg?branch=master)](https://coveralls.io/github/sic-f/fb?branch=master)

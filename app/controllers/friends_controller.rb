@@ -7,8 +7,8 @@ class FriendsController < ApplicationController
   end
 
   def create
+    render js: "alert('User has deleted his/her friend request to you.');" and return unless @friend_request = FriendRequest.where(friend_requestor_id: params[:friender_id], requested_friend_id: current_user.id).first
     @friend_relationship = current_user.accepted_friends.build(friend_relationship_params)
-    @friend_request = FriendRequest.where(friend_requestor_id: params[:friender_id], requested_friend_id: current_user.id).first
     @friend_invitations = current_user.friend_invitations # For updating number of friend requests
 
     respond_to do |format|

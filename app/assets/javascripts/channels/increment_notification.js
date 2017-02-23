@@ -9,7 +9,7 @@ App.increment_notification = App.cable.subscriptions.create("IncrementNotificati
     /* Header notification badge and dropdown */
     $(".notification-friend-invitations#nfi" + data.requested_friend.id).css("display", "inline-block");
     $(".notification-friend-invitations#nfi" + data.requested_friend.id + " li").html(data.friend_requests_notification);
-    $("#notification-dropdown").append(data.notification_friend_invitation);
+    $("#notification-dropdown" + data.requested_friend.id).append(data.notification_friend_invitation);
 
     /* Friend requests index */
     /* Headline */

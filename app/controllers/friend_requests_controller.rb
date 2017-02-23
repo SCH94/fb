@@ -40,7 +40,7 @@ class FriendRequestsController < ApplicationController
       respond_to do |format|
 
         format.js do
-          ActionCable.server.broadcast 'delete_sent_friend_request_channel', friend_request: @friend_request, friend_requestor: @friend_requestor, friend_requests_notification: friend_requests_notification(@requested_friend) if current_user != @requested_friend
+          ActionCable.server.broadcast 'delete_sent_friend_request_channel', friend_request: @friend_request, friend_requestor: @friend_requestor, friend_requests_notification: friend_requests_notification(@requested_friend), requested_friend: @requested_friend, headline_friend_invitations: headline_friend_invitations if current_user != @requested_friend
         end
 
         format.html do

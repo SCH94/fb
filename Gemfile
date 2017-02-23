@@ -5,9 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.3.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 5.0.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -26,7 +25,7 @@ gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+# gem 'jbuilder', '~> 2.5'
 # Simple, Heroku-friendly Rails app configuration using ENV and a single YAML file
 gem 'figaro'
 # Use Haml for templating
@@ -42,7 +41,7 @@ gem "mini_magick"
 # Materialize CSS
 gem 'materialize-sass'
 # Selenium web-driver
-gem 'selenium-webdriver'
+# gem 'selenium-webdriver'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -57,11 +56,10 @@ gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+  gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.5'
   gem 'rails-controller-testing'
-  gem 'pry-byebug'
-  gem 'irbtools-more', require: 'irbtools/binding'
+  gem 'irbtools', require: 'irbtools/binding'
   gem 'letter_opener'
   gem 'coveralls', require: false
 end
@@ -75,8 +73,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'guard'
   gem 'guard-livereload', '~> 2.5', require: false
-  gem 'guard-rspec', require: false
-  gem 'guard-cucumber'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
