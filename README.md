@@ -1,3 +1,5 @@
+<img src="https://ruby-version-badger.herokuapp.com/github/sic-f/fb"></img>
+
 fb rails app
 
 * access pre-made users using login format `firstname.lastname@example.com`, password is **foobar**.
