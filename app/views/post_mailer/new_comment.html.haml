@@ -1,0 +1,13 @@
+%p Hi #{@user.first_name} #{@user.last_name},
+%br/
+%p #{link_to @commenter.first_name + ' ' + @commenter.last_name, @commenter} has commented on your #{link_to 'post:', user_url(@user, anchor: "p#{@post.id}")}
+%br/
+%blockquote <em>"#{@post.content}"</em>
+%br/
+
+View the comment on your #{link_to 'post', user_url(@user, anchor: "p#{@post.id}")} on Efbook.
+%br/
+%br/
+Regards,
+%br/
+Efbook system

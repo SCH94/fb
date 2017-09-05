@@ -6,10 +6,11 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
 
     respond_to do |format|
-      format.js { @comment.save }
+      format.js { PostMailer.new_comment(@comment).deliver_later if @comment.save }
       format.html do
         if @comment.save
           redirect_back fallback_location: root_path, notice: "Commented on #{helpers.link_to 'post', @post}", flash: { html_safe: true }
+          PostMailer.new_comment(@comment).deliver_later
         else
           redirect_back fallback_location: root_path, notice: "Can't have blank comment."
         end
